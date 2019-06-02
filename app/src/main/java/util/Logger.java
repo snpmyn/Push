@@ -16,7 +16,7 @@ public class Logger {
         }
     }
 
-    static void v(String tag, String msg) {
+    public static void v(String tag, String msg) {
         if (LOG_ENABLE) {
             Log.v(tag, msg);
         }

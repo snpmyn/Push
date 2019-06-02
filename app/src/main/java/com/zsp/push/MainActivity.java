@@ -10,7 +10,7 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import util.LocalBroadcastManager;
+import kit.LocalBroadcastManagerKit;
 import util.Logger;
 
 /**
@@ -24,11 +24,6 @@ public class MainActivity extends AppCompatActivity {
      */
     public static final String ACTION_MESSAGE_RECEIVED = "com.zsp.push.ACTION_MESSAGE_RECEIVED";
     /**
-     * key
-     */
-    public static final String KEY_MESSAGE = "message";
-    public static final String KEY_EXTRAS = "extras";
-    /**
      * 前台否
      */
     public static boolean isForeground = false;
@@ -36,6 +31,11 @@ public class MainActivity extends AppCompatActivity {
      * 消息接收器
      */
     private MessageReceiver messageReceiver;
+    /**
+     * key
+     */
+    public static final String KEY_MESSAGE = "message";
+    public static final String KEY_EXTRAS = "extras";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -58,7 +58,7 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     protected void onDestroy() {
-        LocalBroadcastManager.getInstance(this).unregisterReceiver(messageReceiver);
+        LocalBroadcastManagerKit.getInstance(this).unregisterReceiver(messageReceiver);
         super.onDestroy();
     }
 
@@ -70,7 +70,7 @@ public class MainActivity extends AppCompatActivity {
         IntentFilter intentFilter = new IntentFilter();
         intentFilter.addAction(ACTION_MESSAGE_RECEIVED);
         intentFilter.setPriority(IntentFilter.SYSTEM_HIGH_PRIORITY);
-        LocalBroadcastManager.getInstance(this).registerReceiver(messageReceiver, intentFilter);
+        LocalBroadcastManagerKit.getInstance(this).registerReceiver(messageReceiver, intentFilter);
     }
 
     public class MessageReceiver extends BroadcastReceiver {

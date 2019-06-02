@@ -1,4 +1,4 @@
-package util;
+package kit;
 
 import android.content.BroadcastReceiver;
 import android.content.Context;
@@ -12,30 +12,30 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Set;
 
+import util.Logger;
+
 /**
- * @decs: 本地广播管理器
+ * @decs: LocalBroadcastManagerKit
  * @author: 郑少鹏
  * @date: 2019/5/31 16:54
  */
-public final class LocalBroadcastManager {
-    static final int MSG_EXEC_PENDING_BROADCASTS = 1;
-    private static final String TAG = "LocalBroadcastManager";
-    private static final boolean DEBUG = false;
+public final class LocalBroadcastManagerKit {
+    private static final String TAG = "LocalBroadcastManagerKit";
     private static final Object M_LOCK = new Object();
-    private static LocalBroadcastManager mInstance;
+    private static LocalBroadcastManagerKit mInstance;
     private final Context mAppContext;
     private final HashMap<BroadcastReceiver, ArrayList<IntentFilter>> mReceivers = new HashMap<>();
     private final HashMap<String, ArrayList<ReceiverRecord>> mActions = new HashMap<>();
     private final ArrayList<BroadcastRecord> mPendingBroadcasts = new ArrayList<>();
     private final Handler mHandler;
 
-    private LocalBroadcastManager(Context context) {
+    private LocalBroadcastManagerKit(Context context) {
         this.mAppContext = context;
         this.mHandler = new Handler(context.getMainLooper()) {
             @Override
             public void handleMessage(Message msg) {
                 if (msg.what == 1) {
-                    LocalBroadcastManager.this.executePendingBroadcasts();
+                    LocalBroadcastManagerKit.this.executePendingBroadcasts();
                 } else {
                     super.handleMessage(msg);
                 }
@@ -43,18 +43,16 @@ public final class LocalBroadcastManager {
         };
     }
 
-    public static LocalBroadcastManager getInstance(Context context) {
-        Object var1 = M_LOCK;
+    public static LocalBroadcastManagerKit getInstance(Context context) {
         synchronized (M_LOCK) {
             if (mInstance == null) {
-                mInstance = new LocalBroadcastManager(context.getApplicationContext());
+                mInstance = new LocalBroadcastManagerKit(context.getApplicationContext());
             }
             return mInstance;
         }
     }
 
     public void registerReceiver(BroadcastReceiver receiver, IntentFilter filter) {
-        HashMap var3 = this.mReceivers;
         synchronized (this.mReceivers) {
             ReceiverRecord entry = new ReceiverRecord(filter, receiver);
             ArrayList filters = this.mReceivers.get(receiver);
@@ -76,7 +74,6 @@ public final class LocalBroadcastManager {
     }
 
     public void unregisterReceiver(BroadcastReceiver receiver) {
-        HashMap var2 = this.mReceivers;
         synchronized (this.mReceivers) {
             ArrayList filters = this.mReceivers.remove(receiver);
             if (filters != null) {
@@ -104,7 +101,6 @@ public final class LocalBroadcastManager {
     }
 
     public boolean sendBroadcast(Intent intent) {
-        HashMap var2 = this.mReceivers;
         synchronized (this.mReceivers) {
             String action = intent.getAction();
             String type = intent.resolveTypeIfNeeded(this.mAppContext.getContentResolver());
@@ -184,13 +180,11 @@ public final class LocalBroadcastManager {
         if (this.sendBroadcast(intent)) {
             this.executePendingBroadcasts();
         }
-
     }
 
     private void executePendingBroadcasts() {
         while (true) {
             BroadcastRecord[] brs;
-            HashMap i = this.mReceivers;
             synchronized (this.mReceivers) {
                 int br = this.mPendingBroadcasts.size();
                 if (br <= 0) {
@@ -230,12 +224,11 @@ public final class LocalBroadcastManager {
 
         @Override
         public String toString() {
-            String builder = "Receiver{" +
+            return "Receiver{" +
                     this.receiver +
                     " filter=" +
                     this.filter +
                     "}";
-            return builder;
         }
     }
 }

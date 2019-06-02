@@ -1,4 +1,4 @@
-package util;
+package kit;
 
 import android.content.Context;
 import android.content.pm.ApplicationInfo;
@@ -17,25 +17,27 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import cn.jpush.android.api.JPushInterface;
+import util.Logger;
 import value.Magic;
 
 /**
- * @decs: ExampleUtils
+ * @decs: ExampleKit
  * @author: 郑少鹏
  * @date: 2019/5/31 15:05
  */
-public class ExampleUtils {
-    public static final String PREFS_NAME = "JPUSH_EXAMPLE";
-    public static final String PREFS_DAYS = "JPUSH_EXAMPLE_DAYS";
-    public static final String PREFS_START_TIME = "PREFS_START_TIME";
-    public static final String PREFS_END_TIME = "PREFS_END_TIME";
-    private static final String TAG = "ExampleUtils";
+public class ExampleKit {
+    private static final String TAG = "ExampleKit";
     private static final String KEY_APP_KEY = "JPUSH_APP_KEY";
     /**
      * "+"或数字开头
      * 后面内容仅含"-"和数字
      */
     private final static String MOBILE_NUMBER_CHARS = "^[+0-9][-0-9]+$";
+    /**
+     * Pattern
+     */
+    private static Pattern p1 = Pattern.compile("^[\u4E00-\u9FA50-9a-zA-Z_!@#$&*+=.|]+$");
+    private static Pattern p2 = Pattern.compile("[\\x20-\\x7E]+");
 
     /**
      * 手机号有效否
@@ -61,8 +63,7 @@ public class ExampleUtils {
      * @return Tag和Alias有效否
      */
     public static boolean isValidTagAndAlias(String string) {
-        Pattern p = Pattern.compile("^[\u4E00-\u9FA50-9a-zA-Z_!@#$&*+=.|]+$");
-        Matcher m = p.matcher(string);
+        Matcher m = p1.matcher(string);
         return m.matches();
     }
 
@@ -82,7 +83,7 @@ public class ExampleUtils {
             }
             if (null != metaData) {
                 appKey = metaData.getString(KEY_APP_KEY);
-                if ((null == appKey) || appKey.length() != Magic.INT_TWENTITY_FOUR) {
+                if ((null == appKey) || appKey.length() != Magic.INT_TWENTY_FOUR) {
                     appKey = null;
                 }
             }
@@ -123,18 +124,18 @@ public class ExampleUtils {
         return (info != null && info.isConnected());
     }
 
-    public static String getImei(Context context, String imei) {
+    public static String getImei(Context context, String string) {
         String ret = null;
         try {
             TelephonyManager telephonyManager = (TelephonyManager) context.getSystemService(Context.TELEPHONY_SERVICE);
             ret = telephonyManager.getDeviceId();
         } catch (Exception e) {
-            Logger.e(ExampleUtils.class.getSimpleName(), e.getMessage());
+            Logger.e(ExampleKit.class.getSimpleName(), e.getMessage());
         }
         if (isReadableASCII(ret)) {
             return ret;
         } else {
-            return imei;
+            return string;
         }
     }
 
@@ -143,8 +144,7 @@ public class ExampleUtils {
             return false;
         }
         try {
-            Pattern p = Pattern.compile("[\\x20-\\x7E]+");
-            return p.matcher(string).matches();
+            return p2.matcher(string).matches();
         } catch (Throwable e) {
             return true;
         }
