@@ -1,5 +1,6 @@
 package kit;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.os.Handler;
 import android.os.Message;
@@ -47,6 +48,7 @@ public class TagAliasMobileNumberOperatorKit {
     private static int sequence = 1;
     private Context context;
     private SparseArray<Object> setActionCache = new SparseArray<>();
+    @SuppressLint("HandlerLeak")
     private Handler delaySendHandler = new Handler() {
         @Override
         public void handleMessage(Message msg) {
