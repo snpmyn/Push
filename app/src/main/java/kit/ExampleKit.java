@@ -18,6 +18,7 @@ import java.util.regex.Pattern;
 
 import cn.jpush.android.api.JPushInterface;
 import util.Logger;
+import util.ThreadUtils;
 import value.Magic;
 
 /**
@@ -109,13 +110,13 @@ public class ExampleKit {
     }
 
     static void showToast(final String toast, final Context context) {
-        new Thread(() -> {
+        ThreadUtils.stepScheduledExecutorService().execute(() -> {
             if (Looper.myLooper() == null) {
                 Looper.prepare();
             }
             Toast.makeText(context, toast, Toast.LENGTH_SHORT).show();
             Looper.loop();
-        }).start();
+        });
     }
 
     static boolean isConnected(Context context) {
