@@ -6,12 +6,12 @@ import android.content.Intent;
 import android.content.IntentFilter;
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.util.Log;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import kit.LocalBroadcastManagerKit;
-import util.Logger;
 
 /**
  * @decs: 主页
@@ -88,7 +88,7 @@ public class MainActivity extends AppCompatActivity {
                     Toast.makeText(MainActivity.this, stringBuilder.toString(), Toast.LENGTH_SHORT).show();
                 }
             } catch (Exception e) {
-                Logger.e(this.getClass().getSimpleName(), e.getMessage());
+                Log.e(this.getClass().getSimpleName(), e.getMessage());
             }
         }
     }

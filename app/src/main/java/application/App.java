@@ -5,10 +5,11 @@ import android.app.Application;
 import android.content.ContentProvider;
 import android.os.Build;
 import android.os.Bundle;
+import android.util.Log;
+
+import com.zsp.utilone.activity.ActivitySuperviseManager;
 
 import cn.jpush.android.api.JPushInterface;
-import util.ActivitySuperviseUtils;
-import util.Logger;
 
 /**
  * Created on 2019/5/31.
@@ -45,7 +46,7 @@ public class App extends Application {
         JPushInterface.setDebugMode(true);
         // 初始
         JPushInterface.init(this);
-        Logger.d("RegistrationID", JPushInterface.getRegistrationID(this));
+        Log.d("RegistrationID", JPushInterface.getRegistrationID(this));
     }
 
     /**
@@ -56,7 +57,7 @@ public class App extends Application {
             @Override
             public void onActivityCreated(Activity activity, Bundle savedInstanceState) {
                 // 添监听到创事件Activity至集合
-                ActivitySuperviseUtils.pushActivity(activity);
+                ActivitySuperviseManager.pushActivity(activity);
             }
 
             @Override
@@ -87,7 +88,7 @@ public class App extends Application {
             @Override
             public void onActivityDestroyed(Activity activity) {
                 // 移监听到销事件Activity出集合
-                ActivitySuperviseUtils.finishActivity(activity);
+                ActivitySuperviseManager.finishActivity(activity);
             }
         });
     }

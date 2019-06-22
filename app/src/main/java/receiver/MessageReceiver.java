@@ -2,6 +2,7 @@ package receiver;
 
 import android.app.Notification;
 import android.content.Context;
+import android.util.Log;
 import android.widget.Toast;
 
 import cn.jpush.android.api.CmdMessage;
@@ -10,7 +11,6 @@ import cn.jpush.android.api.JPushMessage;
 import cn.jpush.android.api.NotificationMessage;
 import cn.jpush.android.service.JPushMessageReceiver;
 import kit.TagAliasMobileNumberOperatorKit;
-import util.Logger;
 
 /**
  * @decs: 消息接收器
@@ -34,78 +34,78 @@ public class MessageReceiver extends JPushMessageReceiver {
 
     @Override
     public Notification getNotification(Context context, NotificationMessage notificationMessage) {
-        Logger.d(TAG, "getNotification");
+        Log.d(TAG, "getNotification");
         return super.getNotification(context, notificationMessage);
     }
 
     @Override
     public void onMessage(Context context, CustomMessage customMessage) {
         super.onMessage(context, customMessage);
-        Logger.d(TAG, "【onMessage】收自定消息回调");
+        Log.d(TAG, "【onMessage】收自定消息回调");
         Toast.makeText(context, customMessage.message, Toast.LENGTH_SHORT).show();
     }
 
     @Override
     public void onNotifyMessageOpened(Context context, NotificationMessage notificationMessage) {
         super.onNotifyMessageOpened(context, notificationMessage);
-        Logger.d(TAG, "【onNotifyMessageOpened】点通知回调");
+        Log.d(TAG, "【onNotifyMessageOpened】点通知回调");
     }
 
     @Override
     public void onNotifyMessageArrived(Context context, NotificationMessage notificationMessage) {
         super.onNotifyMessageArrived(context, notificationMessage);
-        Logger.d(TAG, "【onNotifyMessageArrived】收通知回调");
+        Log.d(TAG, "【onNotifyMessageArrived】收通知回调");
     }
 
     @Override
     public void onNotifyMessageDismiss(Context context, NotificationMessage notificationMessage) {
         super.onNotifyMessageDismiss(context, notificationMessage);
-        Logger.d(TAG, "【onNotifyMessageDismiss】清通知回调");
+        Log.d(TAG, "【onNotifyMessageDismiss】清通知回调");
     }
 
     @Override
     public void onRegister(Context context, String s) {
         super.onRegister(context, s);
-        Logger.d(TAG, "【onRegister】注册成功回调");
+        Log.d(TAG, "【onRegister】注册成功回调");
     }
 
     @Override
     public void onConnected(Context context, boolean b) {
         super.onConnected(context, b);
-        Logger.d(TAG, "【onConnected】长连接状回调");
+        Log.d(TAG, "【onConnected】长连接状回调");
     }
 
     @Override
     public void onCommandResult(Context context, CmdMessage cmdMessage) {
         super.onCommandResult(context, cmdMessage);
-        Logger.d(TAG, "【onCommandResult】注册失败回调");
+        Log.d(TAG, "【onCommandResult】注册失败回调");
     }
 
     @Override
     public void onTagOperatorResult(Context context, JPushMessage jPushMessage) {
         super.onTagOperatorResult(context, jPushMessage);
-        Logger.d(TAG, "【onTagOperatorResult】tag增删查改于此法回调结果");
+        Log.d(TAG, "【onTagOperatorResult】tag增删查改于此法回调结果");
         TagAliasMobileNumberOperatorKit.getInstance().onTagOperatorResult(context, jPushMessage);
     }
 
     @Override
     public void onCheckTagOperatorResult(Context context, JPushMessage jPushMessage) {
         super.onCheckTagOperatorResult(context, jPushMessage);
-        Logger.d(TAG, "【onCheckTagOperatorResult】查某tag与当前用户绑状于此法回调结果");
+        Log.d(TAG, "【onCheckTagOperatorResult】查某tag与当前用户绑状于此法回调结果");
         TagAliasMobileNumberOperatorKit.getInstance().onCheckTagOperatorResult(context, jPushMessage);
     }
 
     @Override
     public void onAliasOperatorResult(Context context, JPushMessage jPushMessage) {
         super.onAliasOperatorResult(context, jPushMessage);
-        Logger.d(TAG, "【onAliasOperatorResult】alias相关操作于此法回调结果");
+        Log.d(TAG, "【onAliasOperatorResult】alias相关操作于此法回调结果");
         TagAliasMobileNumberOperatorKit.getInstance().onAliasOperatorResult(context, jPushMessage);
     }
 
     @Override
     public void onMobileNumberOperatorResult(Context context, JPushMessage jPushMessage) {
         super.onMobileNumberOperatorResult(context, jPushMessage);
-        Logger.d(TAG, "【onMobileNumberOperatorResult】设手机号于此法回调结果");
+        Log.d(TAG, "【onMobileNumberOperatorResult】设手机号于此法回调结果");
         TagAliasMobileNumberOperatorKit.getInstance().onMobileNumberOperatorResult(context, jPushMessage);
     }
 }

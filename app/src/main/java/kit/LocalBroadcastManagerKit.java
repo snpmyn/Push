@@ -7,12 +7,11 @@ import android.content.IntentFilter;
 import android.net.Uri;
 import android.os.Handler;
 import android.os.Message;
+import android.util.Log;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Set;
-
-import util.Logger;
 
 /**
  * @decs: LocalBroadcastManagerKit
@@ -20,7 +19,7 @@ import util.Logger;
  * @date: 2019/5/31 16:54
  */
 public final class LocalBroadcastManagerKit {
-    private static final String TAG = "LocalBroadcastManagerKit";
+    private static final String TAG = "LocalBroadcastManager";
     private static final Object M_LOCK = new Object();
     private static LocalBroadcastManagerKit mInstance;
     private final Context mAppContext;
@@ -109,29 +108,29 @@ public final class LocalBroadcastManagerKit {
             Set categories = intent.getCategories();
             boolean debug = (intent.getFlags() & 8) != 0;
             if (debug) {
-                Logger.v(TAG, "Resolving type " + type + " scheme " + scheme + " of intent " + intent);
+                Log.v(TAG, "Resolving type " + type + " scheme " + scheme + " of intent " + intent);
             }
             ArrayList entries = this.mActions.get(intent.getAction());
             if (entries != null) {
                 if (debug) {
-                    Logger.v(TAG, "Action list: " + entries);
+                    Log.v(TAG, "Action list: " + entries);
                 }
                 ArrayList receivers = null;
                 int i;
                 for (i = 0; i < entries.size(); ++i) {
                     ReceiverRecord receiver = (ReceiverRecord) entries.get(i);
                     if (debug) {
-                        Logger.v(TAG, "Matching against filter " + receiver.filter);
+                        Log.v(TAG, "Matching against filter " + receiver.filter);
                     }
                     if (receiver.broadcasting) {
                         if (debug) {
-                            Logger.v(TAG, "  Filter\'s target already added");
+                            Log.v(TAG, "  Filter\'s target already added");
                         }
                     } else {
                         int match = receiver.filter.match(action, type, scheme, data, categories, TAG);
                         if (match >= 0) {
                             if (debug) {
-                                Logger.v(TAG, "  Filter matched!  match=0x" + Integer.toHexString(match));
+                                Log.v(TAG, "  Filter matched!  match=0x" + Integer.toHexString(match));
                             }
                             if (receivers == null) {
                                 receivers = new ArrayList();
@@ -156,8 +155,7 @@ public final class LocalBroadcastManagerKit {
                                 default:
                                     reason = "unknown reason";
                             }
-
-                            Logger.v(TAG, "  Filter did not match: " + reason);
+                            Log.v(TAG, "  Filter did not match: " + reason);
                         }
                     }
                 }

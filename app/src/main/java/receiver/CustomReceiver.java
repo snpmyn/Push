@@ -8,9 +8,11 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.text.TextUtils;
+import android.util.Log;
 
 import com.zsp.push.DisplayActivity;
 import com.zsp.push.MainActivity;
+import com.zsp.utilone.activity.ActivitySuperviseManager;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -20,8 +22,6 @@ import java.util.Iterator;
 
 import cn.jpush.android.api.JPushInterface;
 import kit.LocalBroadcastManagerKit;
-import util.ActivitySuperviseUtils;
-import util.Logger;
 
 /**
  * @decs: 自定接收器
@@ -39,44 +39,6 @@ public class CustomReceiver extends BroadcastReceiver {
     private static final int ACTION_NOTIFICATION_OPENED = 103;
     private static final int ACTION_RICHPUSH_CALLBACK = 104;
     private static final int ACTION_CONNECTION_CHANGE = 105;
-
-    @Override
-    public void onReceive(Context context, Intent intent) {
-        try {
-            Bundle bundle = intent.getExtras();
-            if (bundle != null) {
-                Logger.d(TAG, "[CustomReceiver] onReceive - " + intent.getAction() + ", extras: " + printBundle(bundle));
-                MyHandler myHandler = new MyHandler(context);
-                Message message = Message.obtain();
-                message.obj = bundle;
-                if (JPushInterface.ACTION_REGISTRATION_ID.equals(intent.getAction())) {
-                    Logger.d(TAG, "[CustomReceiver] Registration Id: " + bundle.getString(JPushInterface.EXTRA_REGISTRATION_ID));
-                    message.arg1 = ACTION_REGISTRATION_ID;
-                } else if (JPushInterface.ACTION_MESSAGE_RECEIVED.equals(intent.getAction())) {
-                    Logger.d(TAG, "[CustomReceiver] 推来的自定消息：" + bundle.getString(JPushInterface.EXTRA_MESSAGE));
-                    message.arg1 = ACTION_MESSAGE_RECEIVED;
-                } else if (JPushInterface.ACTION_NOTIFICATION_RECEIVED.equals(intent.getAction())) {
-                    Logger.d(TAG, "[CustomReceiver] 推来的通知");
-                    Logger.d(TAG, "[CustomReceiver] 推来的通知ID：" + bundle.getInt(JPushInterface.EXTRA_NOTIFICATION_ID));
-                    message.arg1 = ACTION_NOTIFICATION_RECEIVED;
-                } else if (JPushInterface.ACTION_NOTIFICATION_OPENED.equals(intent.getAction())) {
-                    Logger.d(TAG, "[CustomReceiver] 点击打开通知");
-                    message.arg1 = ACTION_NOTIFICATION_OPENED;
-                } else if (JPushInterface.ACTION_RICHPUSH_CALLBACK.equals(intent.getAction())) {
-                    Logger.d(TAG, "[CustomReceiver] RICH PUSH CALLBACK: " + bundle.getString(JPushInterface.EXTRA_EXTRA));
-                    message.arg1 = ACTION_RICHPUSH_CALLBACK;
-                } else if (JPushInterface.ACTION_CONNECTION_CHANGE.equals(intent.getAction())) {
-                    Logger.w(TAG, "[CustomReceiver]" + intent.getAction() + " connected state change to " + intent.getBooleanExtra(JPushInterface.EXTRA_CONNECTION_CHANGE, false));
-                    message.arg1 = ACTION_CONNECTION_CHANGE;
-                } else {
-                    Logger.d(TAG, "[CustomReceiver] Unhandled intent - " + intent.getAction());
-                }
-                myHandler.sendMessage(message);
-            }
-        } catch (Exception e) {
-            Logger.e("onReceive", e.getMessage());
-        }
-    }
 
     /**
      * 打印数据
@@ -96,7 +58,7 @@ public class CustomReceiver extends BroadcastReceiver {
                     break;
                 case JPushInterface.EXTRA_EXTRA:
                     if (TextUtils.isEmpty(bundle.getString(JPushInterface.EXTRA_EXTRA))) {
-                        Logger.i(TAG, "This message has no Extra data");
+                        Log.i(TAG, "This message has no Extra data");
                         continue;
                     }
                     try {
@@ -107,7 +69,7 @@ public class CustomReceiver extends BroadcastReceiver {
                             sb.append("\nkey:").append(key).append(", value: [").append(myKey).append(" - ").append(json.optString(myKey)).append("]");
                         }
                     } catch (JSONException e) {
-                        Logger.e(TAG, "Get message extra JSON error!");
+                        Log.e(TAG, "Get message extra JSON error!");
                     }
                     break;
                 default:
@@ -116,6 +78,32 @@ public class CustomReceiver extends BroadcastReceiver {
             }
         }
         return sb.toString();
+    }
+
+    /**
+     * 消息被收
+     *
+     * @param context 上下文
+     * @param bundle  数据
+     */
+    private static void messageReceived(Context context, Bundle bundle) {
+        if (MainActivity.isForeground) {
+            String message = bundle.getString(JPushInterface.EXTRA_MESSAGE);
+            String extra = bundle.getString(JPushInterface.EXTRA_EXTRA);
+            Intent intent = new Intent(MainActivity.ACTION_MESSAGE_RECEIVED);
+            intent.putExtra(MainActivity.KEY_MESSAGE, message);
+            if (!TextUtils.isEmpty(extra)) {
+                try {
+                    JSONObject extraJson = new JSONObject(extra);
+                    if (extraJson.length() > 0) {
+                        intent.putExtra(MainActivity.KEY_EXTRAS, extra);
+                    }
+                } catch (JSONException e) {
+                    Log.e(TAG, e.getMessage());
+                }
+            }
+            LocalBroadcastManagerKit.getInstance(context).sendBroadcast(intent);
+        }
     }
 
     /**
@@ -166,44 +154,56 @@ public class CustomReceiver extends BroadcastReceiver {
     }
 
     /**
-     * 消息被收
-     *
-     * @param context 上下文
-     * @param bundle  数据
-     */
-    private static void messageReceived(Context context, Bundle bundle) {
-        if (MainActivity.isForeground) {
-            String message = bundle.getString(JPushInterface.EXTRA_MESSAGE);
-            String extra = bundle.getString(JPushInterface.EXTRA_EXTRA);
-            Intent intent = new Intent(MainActivity.ACTION_MESSAGE_RECEIVED);
-            intent.putExtra(MainActivity.KEY_MESSAGE, message);
-            if (!TextUtils.isEmpty(extra)) {
-                try {
-                    JSONObject extraJson = new JSONObject(extra);
-                    if (extraJson.length() > 0) {
-                        intent.putExtra(MainActivity.KEY_EXTRAS, extra);
-                    }
-                } catch (JSONException e) {
-                    Logger.e(TAG, e.getMessage());
-                }
-            }
-            LocalBroadcastManagerKit.getInstance(context).sendBroadcast(intent);
-        }
-    }
-
-    /**
      * 通知被打开
      *
      * @param bundle 数据
      */
     private static void notificationOpened(Bundle bundle) {
-        Activity activity = ActivitySuperviseUtils.getTopActivityInstance();
+        Activity activity = ActivitySuperviseManager.getTopActivityInstance();
         if (activity != null) {
             Intent intent = new Intent(activity, DisplayActivity.class);
             intent.putExtras(bundle);
             /*intent1.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);*/
             intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP);
             activity.startActivity(intent);
+        }
+    }
+
+    @Override
+    public void onReceive(Context context, Intent intent) {
+        try {
+            Bundle bundle = intent.getExtras();
+            if (bundle != null) {
+                Log.d(TAG, "[CustomReceiver] onReceive - " + intent.getAction() + ", extras: " + printBundle(bundle));
+                MyHandler myHandler = new MyHandler(context);
+                Message message = Message.obtain();
+                message.obj = bundle;
+                if (JPushInterface.ACTION_REGISTRATION_ID.equals(intent.getAction())) {
+                    Log.d(TAG, "[CustomReceiver] Registration Id: " + bundle.getString(JPushInterface.EXTRA_REGISTRATION_ID));
+                    message.arg1 = ACTION_REGISTRATION_ID;
+                } else if (JPushInterface.ACTION_MESSAGE_RECEIVED.equals(intent.getAction())) {
+                    Log.d(TAG, "[CustomReceiver] 推来的自定消息：" + bundle.getString(JPushInterface.EXTRA_MESSAGE));
+                    message.arg1 = ACTION_MESSAGE_RECEIVED;
+                } else if (JPushInterface.ACTION_NOTIFICATION_RECEIVED.equals(intent.getAction())) {
+                    Log.d(TAG, "[CustomReceiver] 推来的通知");
+                    Log.d(TAG, "[CustomReceiver] 推来的通知ID：" + bundle.getInt(JPushInterface.EXTRA_NOTIFICATION_ID));
+                    message.arg1 = ACTION_NOTIFICATION_RECEIVED;
+                } else if (JPushInterface.ACTION_NOTIFICATION_OPENED.equals(intent.getAction())) {
+                    Log.d(TAG, "[CustomReceiver] 点击打开通知");
+                    message.arg1 = ACTION_NOTIFICATION_OPENED;
+                } else if (JPushInterface.ACTION_RICHPUSH_CALLBACK.equals(intent.getAction())) {
+                    Log.d(TAG, "[CustomReceiver] RICH PUSH CALLBACK: " + bundle.getString(JPushInterface.EXTRA_EXTRA));
+                    message.arg1 = ACTION_RICHPUSH_CALLBACK;
+                } else if (JPushInterface.ACTION_CONNECTION_CHANGE.equals(intent.getAction())) {
+                    Log.w(TAG, "[CustomReceiver]" + intent.getAction() + " connected state change to " + intent.getBooleanExtra(JPushInterface.EXTRA_CONNECTION_CHANGE, false));
+                    message.arg1 = ACTION_CONNECTION_CHANGE;
+                } else {
+                    Log.d(TAG, "[CustomReceiver] Unhandled intent - " + intent.getAction());
+                }
+                myHandler.sendMessage(message);
+            }
+        } catch (Exception e) {
+            Log.e("onReceive", e.getMessage());
         }
     }
 }

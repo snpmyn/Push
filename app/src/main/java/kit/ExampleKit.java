@@ -11,14 +11,15 @@ import android.os.Bundle;
 import android.os.Looper;
 import android.telephony.TelephonyManager;
 import android.text.TextUtils;
+import android.util.Log;
 import android.widget.Toast;
+
+import com.zsp.utilone.thread.ThreadManager;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import cn.jpush.android.api.JPushInterface;
-import util.Logger;
-import util.ThreadUtils;
 import value.Magic;
 
 /**
@@ -89,7 +90,7 @@ public class ExampleKit {
                 }
             }
         } catch (NameNotFoundException e) {
-            Logger.e(TAG, e.getMessage());
+            Log.e(TAG, e.getMessage());
         }
         return appKey;
     }
@@ -110,7 +111,7 @@ public class ExampleKit {
     }
 
     static void showToast(final String toast, final Context context) {
-        ThreadUtils.stepScheduledExecutorService().execute(() -> {
+        ThreadManager.stepScheduledExecutorService().execute(() -> {
             if (Looper.myLooper() == null) {
                 Looper.prepare();
             }
@@ -131,16 +132,16 @@ public class ExampleKit {
             TelephonyManager telephonyManager = (TelephonyManager) context.getSystemService(Context.TELEPHONY_SERVICE);
             ret = telephonyManager.getDeviceId();
         } catch (Exception e) {
-            Logger.e(ExampleKit.class.getSimpleName(), e.getMessage());
+            Log.e(ExampleKit.class.getSimpleName(), e.getMessage());
         }
-        if (isReadableASCII(ret)) {
+        if (isReadableAscii(ret)) {
             return ret;
         } else {
             return string;
         }
     }
 
-    private static boolean isReadableASCII(CharSequence string) {
+    private static boolean isReadableAscii(CharSequence string) {
         if (TextUtils.isEmpty(string)) {
             return false;
         }
