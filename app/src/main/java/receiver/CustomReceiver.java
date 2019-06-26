@@ -10,6 +10,8 @@ import android.os.Message;
 import android.text.TextUtils;
 import android.util.Log;
 
+import androidx.annotation.NonNull;
+
 import com.zsp.push.DisplayActivity;
 import com.zsp.push.MainActivity;
 import com.zsp.utilone.activity.ActivitySuperviseManager;
@@ -62,11 +64,14 @@ public class CustomReceiver extends BroadcastReceiver {
                         continue;
                     }
                     try {
-                        JSONObject json = new JSONObject(bundle.getString(JPushInterface.EXTRA_EXTRA));
-                        Iterator<String> it = json.keys();
-                        while (it.hasNext()) {
-                            String myKey = it.next();
-                            sb.append("\nkey:").append(key).append(", value: [").append(myKey).append(" - ").append(json.optString(myKey)).append("]");
+                        String extra = bundle.getString(JPushInterface.EXTRA_EXTRA);
+                        if (!TextUtils.isEmpty(extra)) {
+                            JSONObject json = new JSONObject(extra);
+                            Iterator<String> it = json.keys();
+                            while (it.hasNext()) {
+                                String myKey = it.next();
+                                sb.append("\nkey:").append(key).append(", value: [").append(myKey).append(" - ").append(json.optString(myKey)).append("]");
+                            }
                         }
                     } catch (JSONException e) {
                         Log.e(TAG, "Get message extra JSON error!");
@@ -99,7 +104,7 @@ public class CustomReceiver extends BroadcastReceiver {
                         intent.putExtra(MainActivity.KEY_EXTRAS, extra);
                     }
                 } catch (JSONException e) {
-                    Log.e(TAG, e.getMessage());
+                    Log.e(TAG, e.toString());
                 }
             }
             LocalBroadcastManagerKit.getInstance(context).sendBroadcast(intent);
@@ -125,7 +130,7 @@ public class CustomReceiver extends BroadcastReceiver {
         }
 
         @Override
-        public void handleMessage(Message msg) {
+        public void handleMessage(@NonNull Message msg) {
             super.handleMessage(msg);
             Context context = weakReference.get();
             int arg1 = msg.arg1;
@@ -203,7 +208,7 @@ public class CustomReceiver extends BroadcastReceiver {
                 myHandler.sendMessage(message);
             }
         } catch (Exception e) {
-            Log.e("onReceive", e.getMessage());
+            Log.e("onReceive", e.toString());
         }
     }
 }

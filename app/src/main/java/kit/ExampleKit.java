@@ -76,13 +76,11 @@ public class ExampleKit {
      * @return AppKey
      */
     public static String appKey(Context context) {
-        Bundle metaData = null;
+        Bundle metaData;
         String appKey = null;
         try {
             ApplicationInfo ai = context.getPackageManager().getApplicationInfo(context.getPackageName(), PackageManager.GET_META_DATA);
-            if (null != ai) {
-                metaData = ai.metaData;
-            }
+            metaData = ai.metaData;
             if (null != metaData) {
                 appKey = metaData.getString(KEY_APP_KEY);
                 if ((null == appKey) || appKey.length() != Magic.INT_TWENTY_FOUR) {
@@ -90,7 +88,7 @@ public class ExampleKit {
                 }
             }
         } catch (NameNotFoundException e) {
-            Log.e(TAG, e.getMessage());
+            Log.e(TAG, e.toString());
         }
         return appKey;
     }
@@ -132,7 +130,7 @@ public class ExampleKit {
             TelephonyManager telephonyManager = (TelephonyManager) context.getSystemService(Context.TELEPHONY_SERVICE);
             ret = telephonyManager.getDeviceId();
         } catch (Exception e) {
-            Log.e(ExampleKit.class.getSimpleName(), e.getMessage());
+            Log.e(ExampleKit.class.getSimpleName(), e.toString());
         }
         if (isReadableAscii(ret)) {
             return ret;

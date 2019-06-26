@@ -7,6 +7,8 @@ import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
 
+import androidx.annotation.NonNull;
+
 import com.zsp.utilone.activity.ActivitySuperviseManager;
 
 import cn.jpush.android.api.JPushInterface;
@@ -55,38 +57,38 @@ public class App extends Application {
     private void registerActivityListener() {
         registerActivityLifecycleCallbacks(new ActivityLifecycleCallbacks() {
             @Override
-            public void onActivityCreated(Activity activity, Bundle savedInstanceState) {
+            public void onActivityCreated(@NonNull Activity activity, Bundle savedInstanceState) {
                 // 添监听到创事件Activity至集合
                 ActivitySuperviseManager.pushActivity(activity);
             }
 
             @Override
-            public void onActivityStarted(Activity activity) {
+            public void onActivityStarted(@NonNull Activity activity) {
 
             }
 
             @Override
-            public void onActivityResumed(Activity activity) {
+            public void onActivityResumed(@NonNull Activity activity) {
 
             }
 
             @Override
-            public void onActivityPaused(Activity activity) {
+            public void onActivityPaused(@NonNull Activity activity) {
 
             }
 
             @Override
-            public void onActivityStopped(Activity activity) {
+            public void onActivityStopped(@NonNull Activity activity) {
 
             }
 
             @Override
-            public void onActivitySaveInstanceState(Activity activity, Bundle outState) {
+            public void onActivitySaveInstanceState(@NonNull Activity activity, @NonNull Bundle bundle) {
 
             }
 
             @Override
-            public void onActivityDestroyed(Activity activity) {
+            public void onActivityDestroyed(@NonNull Activity activity) {
                 // 移监听到销事件Activity出集合
                 ActivitySuperviseManager.finishActivity(activity);
             }

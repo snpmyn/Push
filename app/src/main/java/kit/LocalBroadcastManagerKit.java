@@ -9,6 +9,8 @@ import android.os.Handler;
 import android.os.Message;
 import android.util.Log;
 
+import androidx.annotation.NonNull;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Set;
@@ -32,7 +34,7 @@ public final class LocalBroadcastManagerKit {
         this.mAppContext = context;
         this.mHandler = new Handler(context.getMainLooper()) {
             @Override
-            public void handleMessage(Message msg) {
+            public void handleMessage(@NonNull Message msg) {
                 if (msg.what == 1) {
                     LocalBroadcastManagerKit.this.executePendingBroadcasts();
                 } else {

@@ -170,7 +170,7 @@ public class TagAliasMobileNumberOperatorKit {
                 case ACTION_CHECK:
                     // 一次仅check一tag
                     Object[] objects = tagAliasBean.tags.toArray();
-                    if (objects != null && objects.length > 0) {
+                    if (objects.length > 0) {
                         String tag = (String) objects[0];
                         JPushInterface.checkTagBindState(context, sequence, tag);
                     }

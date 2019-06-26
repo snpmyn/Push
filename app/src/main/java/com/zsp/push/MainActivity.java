@@ -88,7 +88,7 @@ public class MainActivity extends AppCompatActivity {
                     Toast.makeText(MainActivity.this, stringBuilder.toString(), Toast.LENGTH_SHORT).show();
                 }
             } catch (Exception e) {
-                Log.e(this.getClass().getSimpleName(), e.getMessage());
+                Log.e(this.getClass().getSimpleName(), e.toString());
             }
         }
     }

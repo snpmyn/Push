@@ -10,7 +10,7 @@
     <permission
         android:name="com.zsp.push.permission.JPUSH_MESSAGE"
         android:protectionLevel="signature" />
-    <!-- Required一些系统要求权限（如访网络等） -->
+    <!-- Required一些系统要求权限（访网络等） -->
     <uses-permission android:name="com.zsp.push.permission.JPUSH_MESSAGE" />
     <uses-permission android:name="android.permission.RECEIVE_USER_PRESENT" />
     <uses-permission android:name="android.permission.INTERNET" />
@@ -62,7 +62,7 @@
         <!-- android:enabled不可false -->
         <!-- 该自定Service继承极光JCommonService，可于更多手机平台使推送通道更稳定 -->
         <service
-            android:name="service.CommonService"
+            android:name="service.MyCommonService"
             android:enabled="true"
             android:exported="false"
             android:process=":pushcore">

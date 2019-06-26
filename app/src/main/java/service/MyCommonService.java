@@ -7,6 +7,6 @@ import cn.jpush.android.service.JCommonService;
  * @author: 郑少鹏
  * @date: 2019/5/31 14:49
  */
-public class CommonService extends JCommonService {
+public class MyCommonService extends JCommonService {
 
 }
