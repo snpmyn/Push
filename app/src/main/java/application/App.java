@@ -44,10 +44,8 @@ public class App extends Application {
         super.onCreate();
         // 全局监听Activity生命周期
         registerActivityListener();
-        // debug否
-        JPushInterface.setDebugMode(true);
-        // 初始
-        JPushInterface.init(this);
+        // 极光推送
+        JpushInitConfigure.initJpush(this);
         Log.d("RegistrationID", JPushInterface.getRegistrationID(this));
     }
 
