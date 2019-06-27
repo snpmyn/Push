@@ -12,7 +12,7 @@ import android.util.Log;
 
 import androidx.annotation.NonNull;
 
-import com.zsp.push.DisplayActivity;
+import jpush.activity.JpushContentActivity;
 import com.zsp.push.MainActivity;
 import com.zsp.utilone.activity.ActivitySuperviseManager;
 
@@ -166,7 +166,7 @@ public class CustomReceiver extends BroadcastReceiver {
     private static void notificationOpened(Bundle bundle) {
         Activity activity = ActivitySuperviseManager.getTopActivityInstance();
         if (activity != null) {
-            Intent intent = new Intent(activity, DisplayActivity.class);
+            Intent intent = new Intent(activity, JpushContentActivity.class);
             intent.putExtras(bundle);
             /*intent1.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);*/
             intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP);
