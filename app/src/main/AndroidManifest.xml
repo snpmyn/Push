@@ -44,7 +44,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning">
-        <activity android:name="jpush.activity.JpushContentActivity">
+        <activity android:name="jpush.activity.JpushDisplayActivity">
             <intent-filter>
                 <action android:name="jpush.testAction" />
                 <category android:name="jpush.testCategory" />
@@ -62,7 +62,7 @@
         <!-- android:enabled不可false -->
         <!-- 该自定Service继承极光JCommonService，可于更多手机平台使推送通道更稳定 -->
         <service
-            android:name="jpush.service.MyCommonService"
+            android:name="jpush.service.JpushCommonService"
             android:enabled="true"
             android:exported="false"
             android:process=":pushcore">

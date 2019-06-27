@@ -3,6 +3,7 @@ apply plugin: 'com.android.application'
 android {
     compileSdkVersion 29
     defaultConfig {
+        vectorDrawables.useSupportLibrary = true/*Vector Drawable兼容*/
         applicationId "com.zsp.push"
         minSdkVersion 19
         targetSdkVersion 29
