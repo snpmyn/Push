@@ -1,4 +1,4 @@
-package application;
+package jpush.configure;
 
 import android.app.Application;
 
@@ -10,8 +10,8 @@ import cn.jpush.android.api.JPushInterface;
  * @author 郑少鹏
  * @desc 极光推送初始化配置
  */
-class JpushInitConfigure {
-    static void initJpush(Application application) {
+public class JpushInitConfigure {
+    public static void initJpush(Application application) {
         // 调试模式
         JPushInterface.setDebugMode(true);
         // 初始

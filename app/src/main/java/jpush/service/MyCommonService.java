@@ -1,4 +1,4 @@
-package service;
+package jpush.service;
 
 import cn.jpush.android.service.JCommonService;
 

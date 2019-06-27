@@ -11,7 +11,7 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import kit.LocalBroadcastManagerKit;
+import jpush.kit.LocalBroadcastManagerKit;
 
 /**
  * @decs: 主页

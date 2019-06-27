@@ -12,6 +12,7 @@ import androidx.annotation.NonNull;
 import com.zsp.utilone.activity.ActivitySuperviseManager;
 
 import cn.jpush.android.api.JPushInterface;
+import jpush.configure.JpushInitConfigure;
 
 /**
  * Created on 2019/5/31.
@@ -21,13 +22,13 @@ import cn.jpush.android.api.JPushInterface;
  */
 public class App extends Application {
     /**
-     * Called when the application is starting, before any activity, service,
-     * or receiver objects (excluding content providers) have been created.
+     * Called when the application is starting, before any activity, jpush.service,
+     * or jpush.receiver objects (excluding content providers) have been created.
      *
      * <p>Implementations should be as quick as possible (for example using
      * lazy initialization of state) since the time spent in this function
      * directly impacts the performance of starting the first activity,
-     * service, or receiver in a process.</p>
+     * jpush.service, or jpush.receiver in a process.</p>
      *
      * <p>If you override this method, be sure to call {@code super.onCreate()}.</p>
      *

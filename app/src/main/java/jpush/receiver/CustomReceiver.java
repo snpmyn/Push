@@ -1,4 +1,4 @@
-package receiver;
+package jpush.receiver;
 
 import android.app.Activity;
 import android.content.BroadcastReceiver;
@@ -23,7 +23,7 @@ import java.lang.ref.WeakReference;
 import java.util.Iterator;
 
 import cn.jpush.android.api.JPushInterface;
-import kit.LocalBroadcastManagerKit;
+import jpush.kit.LocalBroadcastManagerKit;
 
 /**
  * @decs: 自定接收器

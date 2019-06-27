@@ -1,4 +1,4 @@
-package kit;
+package jpush.kit;
 
 import android.content.Context;
 import android.content.pm.ApplicationInfo;

@@ -1,4 +1,4 @@
-package kit;
+package jpush.kit;
 
 import android.annotation.SuppressLint;
 import android.content.Context;

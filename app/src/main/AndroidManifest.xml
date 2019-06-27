@@ -62,7 +62,7 @@
         <!-- android:enabled不可false -->
         <!-- 该自定Service继承极光JCommonService，可于更多手机平台使推送通道更稳定 -->
         <service
-            android:name="service.MyCommonService"
+            android:name="jpush.service.MyCommonService"
             android:enabled="true"
             android:exported="false"
             android:process=":pushcore">
@@ -75,7 +75,7 @@
         <!-- 3.3.0始该类回调全事件 -->
         <!-- 该广播继承JPush所提JPushMessageReceiver并如下增一IntentFilter -->
         <receiver
-            android:name="receiver.MessageReceiver"
+            android:name="jpush.receiver.MessageReceiver"
             android:enabled="true"
             android:exported="false">
             <intent-filter>
@@ -87,7 +87,7 @@
         <!-- User defined. For test only. -->
         <!-- 自定接收器 -->
         <receiver
-            android:name="receiver.CustomReceiver"
+            android:name="jpush.receiver.CustomReceiver"
             android:enabled="true"
             android:exported="false">
             <intent-filter>
