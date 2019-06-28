@@ -30,6 +30,11 @@ import jpush.kit.LocalBroadcastManagerKit;
  * 不自定亦不于清单文件配接收器：
  * 1.收推送自定消息不被处理
  * 2.正常收通知（点默打开应用主页）
+ * <p>
+ * 注：
+ * 3.3.0+用新消息回调方式。
+ * 仍需该Receiver接回调，则用新回调方式不重写对应回调法，或重写回调法且调super。
+ * 无需该Receiver接回调，则用新回调方式重写对应回调法且不调super。
  * @author: 郑少鹏
  * @date: 2019/5/31 16:17
  */
@@ -167,8 +172,8 @@ public class CustomReceiver extends BroadcastReceiver {
         Activity activity = ActivitySuperviseManager.getTopActivityInstance();
         if (activity != null) {
             Intent intent = new Intent(activity, JpushDisplayActivity.class);
-            intent.putExtras(bundle);
             intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP);
+            intent.putExtras(bundle);
             activity.startActivity(intent);
         }
     }

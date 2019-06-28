@@ -1,8 +1,9 @@
 package jpush.configure;
 
 import android.app.Application;
+import android.util.Log;
 
-import cn.jpush.android.api.JPushInterface;
+import jpush.kit.JpushKit;
 
 /**
  * Created on 2019/6/26.
@@ -13,8 +14,9 @@ import cn.jpush.android.api.JPushInterface;
 public class JpushInitConfigure {
     public static void initJpush(Application application) {
         // 调试模式
-        JPushInterface.setDebugMode(true);
+        JpushKit.setDebugMode(true);
         // 初始
-        JPushInterface.init(application);
+        JpushKit.init(application);
+        Log.d("RegistrationID", JpushKit.getRegistrationId(application));
     }
 }

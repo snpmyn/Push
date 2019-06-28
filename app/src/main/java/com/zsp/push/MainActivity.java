@@ -11,6 +11,7 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import jpush.kit.JpushKit;
 import jpush.kit.LocalBroadcastManagerKit;
 
 /**
@@ -46,20 +47,23 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     protected void onResume() {
-        isForeground = true;
         super.onResume();
+        isForeground = true;
+        JpushKit.onResume(this);
+        JpushKit.requestPermission(getApplicationContext());
     }
 
     @Override
     protected void onPause() {
-        isForeground = false;
         super.onPause();
+        isForeground = false;
+        JpushKit.onPause(this);
     }
 
     @Override
     protected void onDestroy() {
-        LocalBroadcastManagerKit.getInstance(this).unregisterReceiver(messageReceiver);
         super.onDestroy();
+        LocalBroadcastManagerKit.getInstance(this).unregisterReceiver(messageReceiver);
     }
 
     /**

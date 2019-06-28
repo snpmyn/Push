@@ -5,13 +5,11 @@ import android.app.Application;
 import android.content.ContentProvider;
 import android.os.Build;
 import android.os.Bundle;
-import android.util.Log;
 
 import androidx.annotation.NonNull;
 
 import com.zsp.utilone.activity.ActivitySuperviseManager;
 
-import cn.jpush.android.api.JPushInterface;
 import jpush.configure.JpushInitConfigure;
 
 /**
@@ -47,7 +45,6 @@ public class App extends Application {
         registerActivityListener();
         // 极光推送
         JpushInitConfigure.initJpush(this);
-        Log.d("RegistrationID", JPushInterface.getRegistrationID(this));
     }
 
     /**

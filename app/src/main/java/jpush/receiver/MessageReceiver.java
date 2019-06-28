@@ -13,14 +13,15 @@ import jpush.kit.MessageReceiverKit;
 
 /**
  * @decs: 消息接收器
- * 3.0.7后新增回调方式。
+ * 3.0.7+新增回调方式。
  * <p>
  * 1.新消息回调方式相关回调类。
  * 2.新tag与alias操作回调于开发者自定该类子类中触发。
  * 3.手机号设置回调于开发者自定该类子类中触发。
- * 4.3.3.0后通该类处理事件后，原自定接收器接收事件，将不再回调至自定接收器，而回调至JPushMessageReceiver，否仍回调至自定接收器。
+ * 4.新回调方式同旧自定Receiver兼容，配该Receiver后默亦发广播至旧Receiver。
+ * 重写onMessage、onNotifyMessageArrived、onNotifyMessageOpened、onMultiActionClicked需调super才发广播至旧Receiver。
  * <p>
- * 该类为回调父类，开发者需继承该类并于清单文件配对应实现类，接口操作结果会于所配类下法回调。
+ * 该类为回调父类，开发者需继承该类并于清单文件配对应实现类，接口操作结果于所配类下法回调。
  * @author: 郑少鹏
  * @date: 2019/5/31 14:53
  */

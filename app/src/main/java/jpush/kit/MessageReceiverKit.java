@@ -37,6 +37,9 @@ public class MessageReceiverKit {
     public void onNotifyMessageOpenedExecute(NotificationMessage notificationMessage) {
         Activity activity = ActivitySuperviseManager.getTopActivityInstance();
         if (activity != null) {
+            // 上报用户通知被打开
+            JpushKit.reportNotificationOpened(activity, notificationMessage.msgId);
+            // 跳转
             Intent intent = new Intent(activity, JpushDisplayActivity.class);
             intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP);
             intent.putExtra(JpushConstant.NOTIFICATION_TITLE, notificationMessage.notificationTitle);
