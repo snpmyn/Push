@@ -86,7 +86,7 @@ public class App extends Application {
             @Override
             public void onActivityDestroyed(@NonNull Activity activity) {
                 // 移监听到销事件Activity出集合
-                ActivitySuperviseManager.finishActivity(activity);
+                ActivitySuperviseManager.finishActivity(activity.getClass());
             }
         });
     }
