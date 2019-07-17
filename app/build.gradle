@@ -48,7 +48,7 @@ dependencies {
     /*ButterKnife*/
     api 'com.github.snpmyn:Util:master-SNAPSHOT'
     /*util*/
-    implementation 'cn.jiguang.sdk:jpush:3.3.1'
-    implementation 'cn.jiguang.sdk:jcore:2.0.1'
+    implementation 'cn.jiguang.sdk:jpush:3.3.4'
+    implementation 'cn.jiguang.sdk:jcore:2.1.0'
     /*极光推送*/
 }
