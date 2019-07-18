@@ -2,7 +2,10 @@
 极光推送示例
 
 ### 依赖
-##### com.github.snpmyn:Util
+##### 自身
+###### app
+implementation 'com.github.snpmyn:*Util*:master-SNAPSHOT'
+##### com.github.snpmyn:Util(implementation)
 ###### AndroidLibrary - Application
 api 'org.litepal.android:java:3.0.0'（避重）
 ###### AndroidLibrary - UtilOne
