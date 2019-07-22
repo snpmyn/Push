@@ -51,4 +51,7 @@ dependencies {
     implementation 'cn.jiguang.sdk:jpush:3.3.4'
     implementation 'cn.jiguang.sdk:jcore:2.1.0'
     /*极光推送*/
+    debugImplementation 'com.squareup.leakcanary:leakcanary-android:1.6.3'
+    releaseImplementation 'com.squareup.leakcanary:leakcanary-android-no-op:1.6.3'
+    /*LeakCanary*/
 }

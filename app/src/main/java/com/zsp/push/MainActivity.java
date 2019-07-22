@@ -1,5 +1,6 @@
 package com.zsp.push;
 
+import android.Manifest;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
@@ -11,6 +12,9 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.zsp.utilone.permission.SoulPermissionUtils;
+import com.zsp.utilone.toast.ToastUtils;
+
 import jpush.kit.JpushKit;
 import jpush.kit.LocalBroadcastManagerKit;
 
@@ -20,6 +24,10 @@ import jpush.kit.LocalBroadcastManagerKit;
  * @date: 2019/5/31 12:11
  */
 public class MainActivity extends AppCompatActivity {
+    /**
+     * SoulPermissionUtils
+     */
+    private SoulPermissionUtils soulPermissionUtils;
     /**
      * action
      */
@@ -43,6 +51,8 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         registerMessageReceiver();
+        initConfiguration();
+        execute();
     }
 
     @Override
@@ -64,6 +74,30 @@ public class MainActivity extends AppCompatActivity {
     protected void onDestroy() {
         super.onDestroy();
         LocalBroadcastManagerKit.getInstance(this).unregisterReceiver(messageReceiver);
+    }
+
+    private void initConfiguration() {
+        soulPermissionUtils = new SoulPermissionUtils();
+    }
+
+    private void execute() {
+        soulPermissionUtils.checkAndRequestPermission(this, Manifest.permission.WRITE_EXTERNAL_STORAGE, soulPermissionUtils,
+                true, new SoulPermissionUtils.CheckAndRequestPermissionCallBack() {
+                    @Override
+                    public void onPermissionOk() {
+
+                    }
+
+                    @Override
+                    public void onPermissionDeniedNotRationaleInMiUi(String s) {
+                        ToastUtils.shortShow(MainActivity.this, s);
+                    }
+
+                    @Override
+                    public void onPermissionDeniedNotRationaleWithoutLoopHint(String s) {
+
+                    }
+                });
     }
 
     /**

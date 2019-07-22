@@ -8,6 +8,7 @@ import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 
+import com.squareup.leakcanary.LeakCanary;
 import com.zsp.utilone.activity.ActivitySuperviseManager;
 
 import jpush.configure.JpushInitConfigure;
@@ -41,6 +42,12 @@ public class App extends Application {
     @Override
     public void onCreate() {
         super.onCreate();
+        if (LeakCanary.isInAnalyzerProcess(this)) {
+            // This process is dedicated to LeakCanary for heap analysis.
+            // You should not init your app in this process.
+            return;
+        }
+        LeakCanary.install(this);
         // 全局监听Activity生命周期
         registerActivityListener();
         // 极光推送
