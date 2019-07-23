@@ -12,7 +12,7 @@
         style="@style/Widget.MaterialComponents.Toolbar.Primary"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:navigationIcon="@drawable/ic_top_back_light">
+        app:navigationIcon="@drawable/ic_top_back_light_24dp_background">
 
         <TextView
             android:layout_width="wrap_content"
