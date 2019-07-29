@@ -7,7 +7,6 @@ import android.content.Intent;
 import android.content.IntentFilter;
 import android.os.Bundle;
 import android.text.TextUtils;
-import android.util.Log;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -17,6 +16,7 @@ import com.zsp.utilone.toast.ToastUtils;
 
 import jpush.kit.JpushKit;
 import jpush.kit.LocalBroadcastManagerKit;
+import timber.log.Timber;
 
 /**
  * @decs: 主页
@@ -126,7 +126,7 @@ public class MainActivity extends AppCompatActivity {
                     Toast.makeText(MainActivity.this, stringBuilder.toString(), Toast.LENGTH_SHORT).show();
                 }
             } catch (Exception e) {
-                Log.e(this.getClass().getSimpleName(), e.toString());
+                Timber.e(e);
             }
         }
     }

@@ -2,16 +2,13 @@ package jpush.kit;
 
 import android.content.Context;
 import android.content.pm.ApplicationInfo;
-import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.content.pm.PackageManager.NameNotFoundException;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.os.Looper;
-import android.telephony.TelephonyManager;
 import android.text.TextUtils;
-import android.util.Log;
 import android.widget.Toast;
 
 import com.zsp.utilone.thread.ThreadManager;
@@ -20,6 +17,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import cn.jpush.android.api.JPushInterface;
+import timber.log.Timber;
 import value.Magic;
 
 /**
@@ -28,7 +26,6 @@ import value.Magic;
  * @date: 2019/5/31 15:05
  */
 public class ExampleKit {
-    private static final String TAG = "ExampleKit";
     private static final String KEY_APP_KEY = "JPUSH_APP_KEY";
     /**
      * "+"或数字开头
@@ -88,24 +85,9 @@ public class ExampleKit {
                 }
             }
         } catch (NameNotFoundException e) {
-            Log.e(TAG, e.toString());
+            Timber.e(e);
         }
         return appKey;
-    }
-
-    /**
-     * 版本名
-     *
-     * @param context 上下文
-     * @return 版本名
-     */
-    public static String versionName(Context context) {
-        try {
-            PackageInfo manager = context.getPackageManager().getPackageInfo(context.getPackageName(), 0);
-            return manager.versionName;
-        } catch (NameNotFoundException e) {
-            return "Unknown";
-        }
     }
 
     static void showToast(final String toast, final Context context) {
@@ -122,21 +104,6 @@ public class ExampleKit {
         ConnectivityManager conn = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
         NetworkInfo info = conn.getActiveNetworkInfo();
         return (info != null && info.isConnected());
-    }
-
-    public static String getImei(Context context, String string) {
-        String ret = null;
-        try {
-            TelephonyManager telephonyManager = (TelephonyManager) context.getSystemService(Context.TELEPHONY_SERVICE);
-            ret = telephonyManager.getDeviceId();
-        } catch (Exception e) {
-            Log.e(ExampleKit.class.getSimpleName(), e.toString());
-        }
-        if (isReadableAscii(ret)) {
-            return ret;
-        } else {
-            return string;
-        }
     }
 
     private static boolean isReadableAscii(CharSequence string) {

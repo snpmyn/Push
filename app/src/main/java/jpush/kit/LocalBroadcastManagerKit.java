@@ -7,13 +7,14 @@ import android.content.IntentFilter;
 import android.net.Uri;
 import android.os.Handler;
 import android.os.Message;
-import android.util.Log;
 
 import androidx.annotation.NonNull;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Set;
+
+import timber.log.Timber;
 
 /**
  * @decs: LocalBroadcastManagerKit
@@ -110,29 +111,29 @@ public final class LocalBroadcastManagerKit {
             Set categories = intent.getCategories();
             boolean debug = (intent.getFlags() & 8) != 0;
             if (debug) {
-                Log.v(TAG, "Resolving type " + type + " scheme " + scheme + " of intent " + intent);
+                Timber.d("Resolving type %s scheme %s of intent %s", type, scheme, intent);
             }
             ArrayList entries = this.mActions.get(intent.getAction());
             if (entries != null) {
                 if (debug) {
-                    Log.v(TAG, "Action list: " + entries);
+                    Timber.d("Action list: %s", entries);
                 }
                 ArrayList receivers = null;
                 int i;
                 for (i = 0; i < entries.size(); ++i) {
                     ReceiverRecord receiver = (ReceiverRecord) entries.get(i);
                     if (debug) {
-                        Log.v(TAG, "Matching against filter " + receiver.filter);
+                        Timber.d("Matching against filter %s", receiver.filter);
                     }
                     if (receiver.broadcasting) {
                         if (debug) {
-                            Log.v(TAG, "  Filter\'s target already added");
+                            Timber.d("  Filter\'s target already added");
                         }
                     } else {
                         int match = receiver.filter.match(action, type, scheme, data, categories, TAG);
                         if (match >= 0) {
                             if (debug) {
-                                Log.v(TAG, "  Filter matched!  match=0x" + Integer.toHexString(match));
+                                Timber.d("  Filter matched!  match=0x" + Integer.toHexString(match));
                             }
                             if (receivers == null) {
                                 receivers = new ArrayList();
@@ -157,7 +158,7 @@ public final class LocalBroadcastManagerKit {
                                 default:
                                     reason = "unknown reason";
                             }
-                            Log.v(TAG, "  Filter did not match: " + reason);
+                            Timber.d("  Filter did not match: " + reason);
                         }
                     }
                 }

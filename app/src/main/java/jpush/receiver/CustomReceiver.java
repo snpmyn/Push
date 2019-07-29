@@ -8,7 +8,6 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.text.TextUtils;
-import android.util.Log;
 
 import androidx.annotation.NonNull;
 
@@ -24,6 +23,7 @@ import java.util.Iterator;
 import cn.jpush.android.api.JPushInterface;
 import jpush.activity.JpushDisplayActivity;
 import jpush.kit.LocalBroadcastManagerKit;
+import timber.log.Timber;
 
 /**
  * @decs: 自定接收器
@@ -39,7 +39,6 @@ import jpush.kit.LocalBroadcastManagerKit;
  * @date: 2019/5/31 16:17
  */
 public class CustomReceiver extends BroadcastReceiver {
-    private static final String TAG = "CustomReceiver";
     private static final int ACTION_REGISTRATION_ID = 100;
     private static final int ACTION_MESSAGE_RECEIVED = 101;
     private static final int ACTION_NOTIFICATION_RECEIVED = 102;
@@ -65,7 +64,7 @@ public class CustomReceiver extends BroadcastReceiver {
                     break;
                 case JPushInterface.EXTRA_EXTRA:
                     if (TextUtils.isEmpty(bundle.getString(JPushInterface.EXTRA_EXTRA))) {
-                        Log.i(TAG, "This message has no Extra data");
+                        Timber.d("This message has no Extra data");
                         continue;
                     }
                     try {
@@ -79,7 +78,7 @@ public class CustomReceiver extends BroadcastReceiver {
                             }
                         }
                     } catch (JSONException e) {
-                        Log.e(TAG, "Get message extra JSON error!");
+                        Timber.e(e);
                     }
                     break;
                 default:
@@ -109,7 +108,7 @@ public class CustomReceiver extends BroadcastReceiver {
                         intent.putExtra(MainActivity.KEY_EXTRAS, extra);
                     }
                 } catch (JSONException e) {
-                    Log.e(TAG, e.toString());
+                    Timber.e(e);
                 }
             }
             LocalBroadcastManagerKit.getInstance(context).sendBroadcast(intent);
@@ -183,36 +182,36 @@ public class CustomReceiver extends BroadcastReceiver {
         try {
             Bundle bundle = intent.getExtras();
             if (bundle != null) {
-                Log.d(TAG, "[CustomReceiver] onReceive - " + intent.getAction() + ", extras: " + printBundle(bundle));
+                Timber.d("[CustomReceiver] onReceive - %s, extras: %s", intent.getAction(), printBundle(bundle));
                 MyHandler myHandler = new MyHandler(context);
                 Message message = Message.obtain();
                 message.obj = bundle;
                 if (JPushInterface.ACTION_REGISTRATION_ID.equals(intent.getAction())) {
-                    Log.d(TAG, "[CustomReceiver] Registration Id: " + bundle.getString(JPushInterface.EXTRA_REGISTRATION_ID));
+                    Timber.d("[CustomReceiver] Registration Id: %s", bundle.getString(JPushInterface.EXTRA_REGISTRATION_ID));
                     message.arg1 = ACTION_REGISTRATION_ID;
                 } else if (JPushInterface.ACTION_MESSAGE_RECEIVED.equals(intent.getAction())) {
-                    Log.d(TAG, "[CustomReceiver] 推来的自定消息：" + bundle.getString(JPushInterface.EXTRA_MESSAGE));
+                    Timber.d("[CustomReceiver] 推来的自定消息：%s", bundle.getString(JPushInterface.EXTRA_MESSAGE));
                     message.arg1 = ACTION_MESSAGE_RECEIVED;
                 } else if (JPushInterface.ACTION_NOTIFICATION_RECEIVED.equals(intent.getAction())) {
-                    Log.d(TAG, "[CustomReceiver] 推来的通知");
-                    Log.d(TAG, "[CustomReceiver] 推来的通知ID：" + bundle.getInt(JPushInterface.EXTRA_NOTIFICATION_ID));
+                    Timber.d("[CustomReceiver] 推来的通知");
+                    Timber.d("[CustomReceiver] 推来的通知ID：%s", bundle.getInt(JPushInterface.EXTRA_NOTIFICATION_ID));
                     message.arg1 = ACTION_NOTIFICATION_RECEIVED;
                 } else if (JPushInterface.ACTION_NOTIFICATION_OPENED.equals(intent.getAction())) {
-                    Log.d(TAG, "[CustomReceiver] 点击打开通知");
+                    Timber.d("[CustomReceiver] 点击打开通知");
                     message.arg1 = ACTION_NOTIFICATION_OPENED;
                 } else if (JPushInterface.ACTION_RICHPUSH_CALLBACK.equals(intent.getAction())) {
-                    Log.d(TAG, "[CustomReceiver] RICH PUSH CALLBACK: " + bundle.getString(JPushInterface.EXTRA_EXTRA));
+                    Timber.d("[CustomReceiver] RICH PUSH CALLBACK: %s", bundle.getString(JPushInterface.EXTRA_EXTRA));
                     message.arg1 = ACTION_RICHPUSH_CALLBACK;
                 } else if (JPushInterface.ACTION_CONNECTION_CHANGE.equals(intent.getAction())) {
-                    Log.w(TAG, "[CustomReceiver]" + intent.getAction() + " connected state change to " + intent.getBooleanExtra(JPushInterface.EXTRA_CONNECTION_CHANGE, false));
+                    Timber.d("[CustomReceiver] %s connected state change to %s", intent.getAction(), intent.getBooleanExtra(JPushInterface.EXTRA_CONNECTION_CHANGE, false));
                     message.arg1 = ACTION_CONNECTION_CHANGE;
                 } else {
-                    Log.d(TAG, "[CustomReceiver] Unhandled intent - " + intent.getAction());
+                    Timber.d("[CustomReceiver] Unhandled intent - %s", intent.getAction());
                 }
                 myHandler.sendMessage(message);
             }
         } catch (Exception e) {
-            Log.e("onReceive", e.toString());
+            Timber.e(e);
         }
     }
 }

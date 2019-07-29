@@ -1,9 +1,9 @@
 package jpush.configure;
 
 import android.app.Application;
-import android.util.Log;
 
 import jpush.kit.JpushKit;
+import timber.log.Timber;
 
 /**
  * Created on 2019/6/26.
@@ -17,6 +17,6 @@ public class JpushInitConfigure {
         JpushKit.setDebugMode(true);
         // 初始
         JpushKit.init(application);
-        Log.d("RegistrationID", JpushKit.getRegistrationId(application));
+        Timber.d("RegistrationID: %s", JpushKit.getRegistrationId(application));
     }
 }
