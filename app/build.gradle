@@ -3,7 +3,7 @@ apply plugin: 'com.android.application'
 android {
     compileSdkVersion 29
     defaultConfig {
-        vectorDrawables.useSupportLibrary = true/*Vector Drawable兼容*/
+        vectorDrawables.useSupportLibrary = true
         applicationId "com.zsp.push"
         minSdkVersion 19
         targetSdkVersion 29
@@ -11,9 +11,7 @@ android {
         versionName "1.0"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         ndk {
-            // 对应cpu类型.so库
-            // 其它如'armeabi-v7a','arm64-v8a','x86_64','mips','mips64'
-            abiFilters 'armeabi', 'x86'
+            abiFilters 'armeabi', 'x86'//,'armeabi-v7a','arm64-v8a','x86_64','mips','mips64'
         }
         manifestPlaceholders = [
                 JPUSH_PKGNAME: applicationId,
@@ -51,7 +49,6 @@ dependencies {
     implementation 'cn.jiguang.sdk:jpush:3.3.4'
     implementation 'cn.jiguang.sdk:jcore:2.1.0'
     /*极光推送*/
-    debugImplementation 'com.squareup.leakcanary:leakcanary-android:1.6.3'
-    releaseImplementation 'com.squareup.leakcanary:leakcanary-android-no-op:1.6.3'
+    debugImplementation 'com.squareup.leakcanary:leakcanary-android:2.0-alpha-2'
     /*LeakCanary*/
 }
