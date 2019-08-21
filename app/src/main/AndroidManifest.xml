@@ -4,35 +4,6 @@
     xmlns:tools="http://schemas.android.com/tools"
     package="com.zsp.push">
 
-    <dist:module dist:instant="true" />
-
-    <!-- Required -->
-    <permission
-        android:name="com.zsp.push.permission.JPUSH_MESSAGE"
-        android:protectionLevel="signature" />
-    <!-- Required一些系统要求权限（访网络等） -->
-    <uses-permission android:name="com.zsp.push.permission.JPUSH_MESSAGE" />
-    <uses-permission android:name="android.permission.RECEIVE_USER_PRESENT" />
-    <uses-permission android:name="android.permission.INTERNET" />
-    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
-    <uses-permission
-        android:name="android.permission.WRITE_SETTINGS"
-        tools:ignore="ProtectedPermissions" />
-    <uses-permission
-        android:name="android.permission.MOUNT_UNMOUNT_FILESYSTEMS"
-        tools:ignore="ProtectedPermissions" />
-    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
-    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
-    <!-- Optional for location -->
-    <uses-permission android:name="android.permission.VIBRATE" />
-    <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW" /> <!-- 启6.0系统debug版上层窗口权限 -->
-    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
-    <uses-permission android:name="android.permission.CHANGE_WIFI_STATE" />
-    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
-    <uses-permission android:name="android.permission.ACCESS_LOCATION_EXTRA_COMMANDS" />
-    <uses-permission android:name="android.permission.CHANGE_NETWORK_STATE" />
-    <uses-permission android:name="android.permission.GET_TASKS" />
-
     <application
         android:name="application.App"
         android:allowBackup="false"
@@ -59,19 +30,6 @@
         <!-- android:process将Service放于其它进程 -->
         <!-- android:enabled不可false -->
         <!-- 该自定Service继承极光JCommonService，可于更多手机平台使推送通道更稳定 -->
-        <service
-            android:name="jpush.service.JpushCommonService"
-            android:enabled="true"
-            android:exported="false"
-            android:process=":pushcore">
-            <intent-filter>
-                <action android:name="cn.jiguang.user.service.action" />
-            </intent-filter>
-        </service>
-        <!-- Since JCore2.0.0 Required SDK核心功能 -->
-        <!-- android:process放Service于其它进程 -->
-        <!-- android:enabled不可false -->
-        <!-- 该自定Service继承极光JCommonService，使推送通道于更多手机平台更稳定 -->
         <receiver
             android:name="jpush.receiver.MessageReceiver"
             android:enabled="true"
@@ -82,8 +40,10 @@
                 <category android:name="com.zsp.push" />
             </intent-filter>
         </receiver>
-        <!-- User defined. For test only. -->
-        <!-- 自定接收器 -->
+        <!-- Since JCore2.0.0 Required SDK核心功能 -->
+        <!-- android:process放Service于其它进程 -->
+        <!-- android:enabled不可false -->
+        <!-- 该自定Service继承极光JCommonService，使推送通道于更多手机平台更稳定 -->
         <receiver
             android:name="jpush.receiver.CustomReceiver"
             android:enabled="true"
@@ -97,6 +57,47 @@
                 <category android:name="com.zsp.push" />
             </intent-filter>
         </receiver>
+        <!-- User defined. For test only. -->
+        <!-- 自定接收器 -->
+        <service
+            android:name="jpush.service.JpushCommonService"
+            android:enabled="true"
+            android:exported="false"
+            android:process=":pushcore">
+            <intent-filter>
+                <action android:name="cn.jiguang.user.service.action" />
+            </intent-filter>
+        </service>
     </application>
+
+    <!-- Required -->
+    <permission
+        android:name="com.zsp.push.permission.JPUSH_MESSAGE"
+        android:protectionLevel="signature"
+        tools:ignore="ManifestOrder" />
+    <!-- Required一些系统要求权限（访网络等） -->
+    <uses-permission android:name="com.zsp.push.permission.JPUSH_MESSAGE" />
+    <uses-permission android:name="android.permission.RECEIVE_USER_PRESENT" />
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
+    <uses-permission
+        android:name="android.permission.WRITE_SETTINGS"
+        tools:ignore="ProtectedPermissions" />
+    <uses-permission
+        android:name="android.permission.MOUNT_UNMOUNT_FILESYSTEMS"
+        tools:ignore="ProtectedPermissions" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+    <!-- Optional for location -->
+    <uses-permission android:name="android.permission.VIBRATE" />
+    <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW" /> <!-- 启6.0系统debug版上层窗口权限 -->
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <uses-permission android:name="android.permission.CHANGE_WIFI_STATE" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_LOCATION_EXTRA_COMMANDS" />
+    <uses-permission android:name="android.permission.CHANGE_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.GET_TASKS" />
+
+    <dist:module dist:instant="true" />
 
 </manifest>
