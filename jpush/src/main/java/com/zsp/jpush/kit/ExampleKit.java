@@ -1,4 +1,4 @@
-package jpush.kit;
+package com.zsp.jpush.kit;
 
 import android.content.Context;
 import android.content.pm.ApplicationInfo;
@@ -11,6 +11,7 @@ import android.os.Looper;
 import android.text.TextUtils;
 import android.widget.Toast;
 
+import com.zsp.jpush.value.JpushMagic;
 import com.zsp.utilone.thread.ThreadManager;
 
 import java.util.regex.Matcher;
@@ -18,7 +19,6 @@ import java.util.regex.Pattern;
 
 import cn.jpush.android.api.JPushInterface;
 import timber.log.Timber;
-import value.Magic;
 
 /**
  * @decs: ExampleKit
@@ -80,7 +80,7 @@ public class ExampleKit {
             metaData = ai.metaData;
             if (null != metaData) {
                 appKey = metaData.getString(KEY_APP_KEY);
-                if ((null == appKey) || appKey.length() != Magic.INT_TWENTY_FOUR) {
+                if ((null == appKey) || appKey.length() != JpushMagic.INT_TWENTY_FOUR) {
                     appKey = null;
                 }
             }

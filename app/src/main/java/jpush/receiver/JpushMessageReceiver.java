@@ -8,11 +8,11 @@ import cn.jpush.android.api.CustomMessage;
 import cn.jpush.android.api.JPushMessage;
 import cn.jpush.android.api.NotificationMessage;
 import cn.jpush.android.service.JPushMessageReceiver;
-import jpush.kit.MessageReceiverKit;
+import jpush.kit.JpushMessageReceiverKit;
 import timber.log.Timber;
 
 /**
- * @decs: 消息接收器
+ * @decs: 极光推送消息接收器
  * 3.0.7+新增回调方式。
  * <p>
  * 1.新消息回调方式相关回调类。
@@ -25,12 +25,12 @@ import timber.log.Timber;
  * @author: 郑少鹏
  * @date: 2019/5/31 14:53
  */
-public class MessageReceiver extends JPushMessageReceiver {
-    private MessageReceiverKit messageReceiverKit;
+public class JpushMessageReceiver extends JPushMessageReceiver {
+    private JpushMessageReceiverKit jpushMessageReceiverKit;
 
-    public MessageReceiver() {
+    public JpushMessageReceiver() {
         super();
-        this.messageReceiverKit = new MessageReceiverKit();
+        this.jpushMessageReceiverKit = new JpushMessageReceiverKit();
     }
 
     @Override
@@ -43,14 +43,14 @@ public class MessageReceiver extends JPushMessageReceiver {
     public void onMessage(Context context, CustomMessage customMessage) {
         super.onMessage(context, customMessage);
         Timber.d("【onMessage】收自定消息回调");
-        messageReceiverKit.onMessageExecute(context, customMessage);
+        jpushMessageReceiverKit.onMessageExecute(context, customMessage);
     }
 
     @Override
     public void onNotifyMessageOpened(Context context, NotificationMessage notificationMessage) {
         super.onNotifyMessageOpened(context, notificationMessage);
         Timber.d("【onNotifyMessageOpened】点通知回调");
-        messageReceiverKit.onNotifyMessageOpenedExecute(notificationMessage);
+        jpushMessageReceiverKit.onNotifyMessageOpenedExecute(notificationMessage);
     }
 
     @Override

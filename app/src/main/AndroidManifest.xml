@@ -13,7 +13,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning">
-        <activity android:name="jpush.activity.JpushDisplayActivity">
+        <activity android:name="jpush.display.JpushDisplayActivity">
             <intent-filter>
                 <action android:name="jpush.testAction" />
                 <category android:name="jpush.testCategory" />
@@ -26,12 +26,12 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <!-- Since JCore2.0.0 Required SDK核心功能 -->
-        <!-- android:process将Service放于其它进程 -->
-        <!-- android:enabled不可false -->
-        <!-- 该自定Service继承极光JCommonService，可于更多手机平台使推送通道更稳定 -->
+        <!-- Required since 3.0.7 -->
+        <!-- 新tag/alias接口返结果需开发者配一自定广播 -->
+        <!-- 3.3.0始该类回调全事件 -->
+        <!-- 该广播继承JPush所提JPushMessageReceiver并如下增一IntentFilter -->
         <receiver
-            android:name="jpush.receiver.MessageReceiver"
+            android:name="jpush.receiver.JpushMessageReceiver"
             android:enabled="true"
             android:exported="false">
             <intent-filter>
@@ -40,12 +40,10 @@
                 <category android:name="com.zsp.push" />
             </intent-filter>
         </receiver>
-        <!-- Since JCore2.0.0 Required SDK核心功能 -->
-        <!-- android:process放Service于其它进程 -->
-        <!-- android:enabled不可false -->
-        <!-- 该自定Service继承极光JCommonService，使推送通道于更多手机平台更稳定 -->
+        <!-- User defined. For test only. -->
+        <!-- 自定接收器 -->
         <receiver
-            android:name="jpush.receiver.CustomReceiver"
+            android:name="jpush.receiver.JpushCustomReceiver"
             android:enabled="true"
             android:exported="false">
             <intent-filter>
@@ -53,50 +51,11 @@
                 <action android:name="cn.jpush.android.intent.MESSAGE_RECEIVED" /> <!-- Required 用户接收SDK消息意图 -->
                 <action android:name="cn.jpush.android.intent.NOTIFICATION_RECEIVED" /> <!-- Required 用户接收SDK通知栏信息意图 -->
                 <action android:name="cn.jpush.android.intent.NOTIFICATION_OPENED" /> <!-- Required 用户打开自定通知栏意图 -->
-                <action android:name="cn.jpush.android.intent.CONNECTION" /> <!-- 自1.6.3接收网变（连/断）-->
+                <action android:name="cn.jpush.android.intent.CONNECTION" /> <!-- 自1.6.3接收网变（连/断） -->
                 <category android:name="com.zsp.push" />
             </intent-filter>
         </receiver>
-        <!-- User defined. For test only. -->
-        <!-- 自定接收器 -->
-        <service
-            android:name="jpush.service.JpushCommonService"
-            android:enabled="true"
-            android:exported="false"
-            android:process=":pushcore">
-            <intent-filter>
-                <action android:name="cn.jiguang.user.service.action" />
-            </intent-filter>
-        </service>
     </application>
-
-    <!-- Required -->
-    <permission
-        android:name="com.zsp.push.permission.JPUSH_MESSAGE"
-        android:protectionLevel="signature"
-        tools:ignore="ManifestOrder" />
-    <!-- Required一些系统要求权限（访网络等） -->
-    <uses-permission android:name="com.zsp.push.permission.JPUSH_MESSAGE" />
-    <uses-permission android:name="android.permission.RECEIVE_USER_PRESENT" />
-    <uses-permission android:name="android.permission.INTERNET" />
-    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
-    <uses-permission
-        android:name="android.permission.WRITE_SETTINGS"
-        tools:ignore="ProtectedPermissions" />
-    <uses-permission
-        android:name="android.permission.MOUNT_UNMOUNT_FILESYSTEMS"
-        tools:ignore="ProtectedPermissions" />
-    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
-    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
-    <!-- Optional for location -->
-    <uses-permission android:name="android.permission.VIBRATE" />
-    <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW" /> <!-- 启6.0系统debug版上层窗口权限 -->
-    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
-    <uses-permission android:name="android.permission.CHANGE_WIFI_STATE" />
-    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
-    <uses-permission android:name="android.permission.ACCESS_LOCATION_EXTRA_COMMANDS" />
-    <uses-permission android:name="android.permission.CHANGE_NETWORK_STATE" />
-    <uses-permission android:name="android.permission.GET_TASKS" />
 
     <dist:module dist:instant="true" />
 

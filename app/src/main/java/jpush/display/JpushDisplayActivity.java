@@ -1,4 +1,4 @@
-package jpush.activity;
+package jpush.display;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -11,7 +11,7 @@ import com.zsp.push.R;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
-import jpush.value.JpushConstant;
+import value.PushConstant;
 
 /**
  * @decs: 极光推送展示页
@@ -55,8 +55,8 @@ public class JpushDisplayActivity extends AppCompatActivity {
     private void initConfiguration() {
         Intent intent = getIntent();
         if (intent != null) {
-            notificationTitle = intent.getStringExtra(JpushConstant.NOTIFICATION_TITLE);
-            notificationContent = intent.getStringExtra(JpushConstant.NOTIFICATION_CONTENT);
+            notificationTitle = intent.getStringExtra(PushConstant.NOTIFICATION_TITLE);
+            notificationContent = intent.getStringExtra(PushConstant.NOTIFICATION_CONTENT);
         }
     }
 

@@ -1,4 +1,4 @@
-package jpush.kit;
+package com.zsp.jpush.kit;
 
 import android.content.BroadcastReceiver;
 import android.content.Context;
@@ -133,7 +133,7 @@ public final class LocalBroadcastManagerKit {
                         int match = receiver.filter.match(action, type, scheme, data, categories, TAG);
                         if (match >= 0) {
                             if (debug) {
-                                Timber.d("  Filter matched!  match=0x" + Integer.toHexString(match));
+                                Timber.d("Filter matched! match=0x %s", Integer.toHexString(match));
                             }
                             if (receivers == null) {
                                 receivers = new ArrayList();
@@ -158,7 +158,7 @@ public final class LocalBroadcastManagerKit {
                                 default:
                                     reason = "unknown reason";
                             }
-                            Timber.d("  Filter did not match: " + reason);
+                            Timber.d("Filter did not match: %s", reason);
                         }
                     }
                 }
@@ -223,6 +223,7 @@ public final class LocalBroadcastManagerKit {
             this.receiver = broadcastReceiver;
         }
 
+        @NonNull
         @Override
         public String toString() {
             return "Receiver{" +

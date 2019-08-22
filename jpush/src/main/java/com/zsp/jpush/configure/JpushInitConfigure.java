@@ -1,8 +1,9 @@
-package jpush.configure;
+package com.zsp.jpush.configure;
 
 import android.app.Application;
 
-import jpush.kit.JpushKit;
+import com.zsp.jpush.kit.JpushKit;
+
 import timber.log.Timber;
 
 /**

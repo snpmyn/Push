@@ -11,11 +11,11 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.zsp.jpush.kit.JpushKit;
+import com.zsp.jpush.kit.LocalBroadcastManagerKit;
 import com.zsp.utilone.permission.SoulPermissionUtils;
 import com.zsp.utilone.toast.ToastUtils;
 
-import jpush.kit.JpushKit;
-import jpush.kit.LocalBroadcastManagerKit;
 import timber.log.Timber;
 
 /**

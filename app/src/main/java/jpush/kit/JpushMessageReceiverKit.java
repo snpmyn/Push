@@ -4,21 +4,22 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 
+import com.zsp.jpush.kit.JpushKit;
 import com.zsp.utilone.activity.ActivitySuperviseManager;
 import com.zsp.utilone.toast.ToastUtils;
 
 import cn.jpush.android.api.CustomMessage;
 import cn.jpush.android.api.NotificationMessage;
-import jpush.activity.JpushDisplayActivity;
-import jpush.value.JpushConstant;
+import jpush.display.JpushDisplayActivity;
+import value.PushConstant;
 
 /**
  * Created on 2019/6/27.
  *
  * @author 郑少鹏
- * @desc MessageReceiverKit
+ * @desc JpushMessageReceiverKit
  */
-public class MessageReceiverKit {
+public class JpushMessageReceiverKit {
     /**
      * OnMessage执行
      *
@@ -42,8 +43,8 @@ public class MessageReceiverKit {
             // 跳转
             Intent intent = new Intent(activity, JpushDisplayActivity.class);
             intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP);
-            intent.putExtra(JpushConstant.NOTIFICATION_TITLE, notificationMessage.notificationTitle);
-            intent.putExtra(JpushConstant.NOTIFICATION_CONTENT, notificationMessage.notificationContent);
+            intent.putExtra(PushConstant.NOTIFICATION_TITLE, notificationMessage.notificationTitle);
+            intent.putExtra(PushConstant.NOTIFICATION_CONTENT, notificationMessage.notificationContent);
             activity.startActivity(intent);
         }
     }

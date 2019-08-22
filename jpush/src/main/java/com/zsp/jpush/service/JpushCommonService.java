@@ -1,4 +1,4 @@
-package jpush.service;
+package com.zsp.jpush.service;
 
 import cn.jpush.android.service.JCommonService;
 

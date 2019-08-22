@@ -1,4 +1,4 @@
-package jpush.kit;
+package com.zsp.jpush.kit;
 
 import android.app.Activity;
 import android.content.Context;
@@ -137,7 +137,7 @@ public class JpushKit {
      * @param context 应用上下文
      * @param msgId   所推每条消息和通知对应的唯一ID（msgId来源于发消息和通知的Extra字段JPushInterface.EXTRA_MSG_ID，参考接收推送消息Receiver）
      */
-    static void reportNotificationOpened(Context context, String msgId) {
+    public static void reportNotificationOpened(Context context, String msgId) {
         JPushInterface.reportNotificationOpened(context, msgId);
     }
 

@@ -1,12 +1,12 @@
-package value;
+package com.zsp.jpush.value;
 
 /**
  * Created on 2019/5/31.
  *
  * @author 郑少鹏
- * @desc 魔法值
+ * @desc 极光推送魔法值
  */
-public class Magic {
+public class JpushMagic {
     /**
      * int
      */

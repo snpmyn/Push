@@ -1,12 +1,12 @@
-package jpush.value;
+package value;
 
 /**
  * Created on 2019/6/27.
  *
  * @author 郑少鹏
- * @desc 极光推送常量
+ * @desc 推送常量
  */
-public class JpushConstant {
+public class PushConstant {
     /**
      * 通知标题
      */

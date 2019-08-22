@@ -1,4 +1,4 @@
-package jpush.kit;
+package com.zsp.jpush.kit;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
@@ -6,13 +6,16 @@ import android.os.Handler;
 import android.os.Message;
 import android.util.SparseArray;
 
+import androidx.annotation.NonNull;
+
+import com.zsp.jpush.value.JpushMagic;
+
 import java.util.Locale;
 import java.util.Set;
 
 import cn.jpush.android.api.JPushInterface;
 import cn.jpush.android.api.JPushMessage;
 import timber.log.Timber;
-import value.Magic;
 
 /**
  * @decs: TagAliasMobileNumberOperatorKit
@@ -194,7 +197,7 @@ public class TagAliasMobileNumberOperatorKit {
         // 错误码6002超时
         // 错误码6014服务器繁忙
         // 建延迟重试
-        if (errorCode == Magic.INT_SIX_THOUSAND_TWO || errorCode == Magic.INT_SIX_THOUSAND_FOURTEEN) {
+        if (errorCode == JpushMagic.INT_SIX_THOUSAND_TWO || errorCode == JpushMagic.INT_SIX_THOUSAND_FOURTEEN) {
             Timber.d("need retry");
             if (tagAliasBean != null) {
                 Message message = new Message();
@@ -217,7 +220,7 @@ public class TagAliasMobileNumberOperatorKit {
         // 错误码6002超时
         // 错误码6024服务器内错
         // 建稍后重试
-        if (errorCode == Magic.INT_SIX_THOUSAND_TWO || errorCode == Magic.INT_SIX_THOUSAND_TWENTY_FOUR) {
+        if (errorCode == JpushMagic.INT_SIX_THOUSAND_TWO || errorCode == JpushMagic.INT_SIX_THOUSAND_TWENTY_FOUR) {
             Timber.d("need retry");
             Message message = new Message();
             message.what = DELAY_SET_MOBILE_NUMBER_ACTION;
@@ -276,7 +279,7 @@ public class TagAliasMobileNumberOperatorKit {
             ExampleKit.showToast(logs, context);
         } else {
             String logs = "Failed to " + getActionStr(tagAliasBean.action) + " tags";
-            if (jPushMessage.getErrorCode() == Magic.INT_SIX_THOUSAND_EIGHTEEN) {
+            if (jPushMessage.getErrorCode() == JpushMagic.INT_SIX_THOUSAND_EIGHTEEN) {
                 // tag数超限，需先清除一部分再add
                 logs += ", tags is exceed limit need to clean";
             }
@@ -315,7 +318,7 @@ public class TagAliasMobileNumberOperatorKit {
 
     public void onAliasOperatorResult(Context context, JPushMessage jPushMessage) {
         int sequence = jPushMessage.getSequence();
-        Timber.d("action - onAliasOperatorResult, sequence: %s, alias: ", sequence, jPushMessage.getAlias());
+        Timber.d("action - onAliasOperatorResult, sequence: %s, alias: %s", sequence, jPushMessage.getAlias());
         init(context);
         // 据sequence从之前操作缓存获缓存记录
         TagAliasBean tagAliasBean = (TagAliasBean) setActionCache.get(sequence);
@@ -366,6 +369,7 @@ public class TagAliasMobileNumberOperatorKit {
         String alias;
         boolean isAliasAction;
 
+        @NonNull
         @Override
         public String toString() {
             return "TagAliasBean{" +

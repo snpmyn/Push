@@ -6,11 +6,10 @@ import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 
+import com.zsp.jpush.configure.JpushInitConfigure;
 import com.zsp.push.BuildConfig;
 import com.zsp.utilone.activity.ActivitySuperviseManager;
 import com.zsp.utilone.timber.configure.TimberInitConfigure;
-
-import jpush.configure.JpushInitConfigure;
 
 /**
  * Created on 2019/5/31.
