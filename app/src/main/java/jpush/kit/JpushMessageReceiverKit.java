@@ -23,7 +23,6 @@ public class JpushMessageReceiverKit {
     /**
      * OnMessage执行
      *
-     * @param context       上下文
      * @param customMessage 自定消息
      */
     public void onMessageExecute(Context context, CustomMessage customMessage) {
