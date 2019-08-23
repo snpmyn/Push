@@ -26,6 +26,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <!--Jpush（极光推送消息接收器）-->
         <!-- Required since 3.0.7 -->
         <!-- 新tag/alias接口返结果需开发者配一自定广播 -->
         <!-- 3.3.0始该类回调全事件 -->
@@ -40,8 +41,8 @@
                 <category android:name="com.zsp.push" />
             </intent-filter>
         </receiver>
+        <!--Jpush（极光推送自定接收器）-->
         <!-- User defined. For test only. -->
-        <!-- 自定接收器 -->
         <receiver
             android:name="jpush.receiver.JpushCustomReceiver"
             android:enabled="true"

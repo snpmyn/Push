@@ -4,6 +4,7 @@
     package="com.zsp.jpush">
 
     <application>
+        <!--Jpush（极光推送公共服务）-->
         <!-- Since JCore2.0.0 Required SDK核心功能 -->
         <!-- android:process放Service于其它进程 -->
         <!-- android:enabled不可false -->
