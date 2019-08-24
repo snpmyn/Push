@@ -13,9 +13,9 @@ import timber.log.Timber;
  * @desc 极光推送初始化配置
  */
 public class JpushInitConfigure {
-    public static void initJpush(Application application) {
+    public static void initJpush(Application application, boolean debug) {
         // 调试模式
-        JpushKit.setDebugMode(true);
+        JpushKit.setDebugMode(debug);
         // 初始
         JpushKit.init(application);
         Timber.d("RegistrationID: %s", JpushKit.getRegistrationId(application));

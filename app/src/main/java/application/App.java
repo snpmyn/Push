@@ -26,7 +26,7 @@ public class App extends Application {
         // 全局监听Activity生命周期
         registerActivityListener();
         // 极光推送
-        JpushInitConfigure.initJpush(this);
+        JpushInitConfigure.initJpush(this, BuildConfig.DEBUG);
     }
 
     /**
