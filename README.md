@@ -20,6 +20,7 @@
 * implementation 'androidx.core:core-ktx:1.2.0-alpha03'
 * implementation "org.jetbrains.kotlin:*kotlin-stdlib-jdk7*:$kotlin_version"
 
+
 ### 权限
 #### AndroidLibrary - Jpush
 待补充
