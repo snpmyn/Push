@@ -164,7 +164,7 @@ public class JpushCustomReceiver extends BroadcastReceiver {
             Intent intent = new Intent(activity, JpushDisplayActivity.class);
             intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP);
             intent.putExtras(bundle);
-            activity.startActivity(intent);
+            /*activity.startActivity(intent);*/
         }
     }
 
