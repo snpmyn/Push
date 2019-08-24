@@ -7,6 +7,7 @@
 * api 'com.github.snpmyn:*Util*:master-SNAPSHOT'（避重）
 * api 'cn.jiguang.sdk:jpush:3.3.4'（避重）
 * api 'cn.jiguang.sdk:jcore:2.1.0'（避重）
+
 #### com.github.snpmyn:Util(api)
 ##### AndroidLibrary - UtilOne
 * api 'com.github.bumptech.glide:glide:4.9.0'（避重）
