@@ -4,6 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     package="com.zsp.push">
 
+    <dist:module dist:instant="true" />
+
     <application
         android:name="application.App"
         android:allowBackup="false"
@@ -57,7 +59,5 @@
             </intent-filter>
         </receiver>
     </application>
-
-    <dist:module dist:instant="true" />
 
 </manifest>
