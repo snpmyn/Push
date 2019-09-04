@@ -3,15 +3,18 @@
 [![GitHub license](https://img.shields.io/badge/license-Apache%20License%202.0-blue.svg?style=flat)](https://www.apache.org/licenses/LICENSE-2.0)
 
 ### 介绍
-极光推送示例
+极光推送
 
 ### 依赖
 #### 自身
-##### AndroidLibrary - Jpush
+##### AndroidLibrary - JCore
 * api 'com.github.snpmyn:*Util*:master-SNAPSHOT'（避重）
-* api 'cn.jiguang.sdk:jpush:3.3.4'（避重）
 * api 'cn.jiguang.sdk:jcore:2.1.0'（避重）
 
+##### AndroidLibrary - JPush
+api 'cn.jiguang.sdk:jpush:3.3.4'（避重）
+##### AndroidLibrary - JAnalytics
+api 'cn.jiguang.sdk:janalytics:2.1.0'（避重）
 #### com.github.snpmyn:Util(api)
 ##### AndroidLibrary - UtilOne
 * api 'com.github.bumptech.glide:glide:4.9.0'（避重）
@@ -29,6 +32,15 @@
 ### 权限
 #### AndroidLibrary - Jpush
 待补充
+#### AndroidLibrary - JAnalytics
+* android:name="android.permission.INTERNET"（避重）
+* android:name="android.permission.WAKE_LOCK"（避重）
+* android:name="android.permission.READ_PHONE_STATE"（避重）
+* android:name="android.permission.WRITE_EXTERNAL_STORAGE"（避重）
+* android:name="android.permission.READ_EXTERNAL_STORAGE"（避重）
+* android:name="android.permission.ACCESS_NETWORK_STATE"（避重）
+* android:name="android.permission.ACCESS_WIFI_STATE"（避重）
+
 #### com.github.snpmyn:Util
 ##### app
 * android:name="android.permission.WRITE_EXTERNAL_STORAGE"（避重）

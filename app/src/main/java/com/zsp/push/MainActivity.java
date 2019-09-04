@@ -11,11 +11,16 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.zsp.janalytics.kit.JanalyticsKit;
 import com.zsp.jpush.kit.JpushKit;
 import com.zsp.jpush.kit.LocalBroadcastManagerKit;
 import com.zsp.utilone.permission.SoulPermissionUtils;
 import com.zsp.utilone.toast.ToastUtils;
 
+import java.util.HashMap;
+import java.util.Map;
+
+import cn.jiguang.analytics.android.api.Currency;
 import timber.log.Timber;
 
 /**
@@ -50,7 +55,6 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        registerMessageReceiver();
         initConfiguration();
         execute();
     }
@@ -61,6 +65,7 @@ public class MainActivity extends AppCompatActivity {
         isForeground = true;
         JpushKit.onResume(this);
         JpushKit.requestPermission(getApplicationContext());
+        JanalyticsKit.onPageStart(this, this.getClass().getCanonicalName());
     }
 
     @Override
@@ -68,6 +73,7 @@ public class MainActivity extends AppCompatActivity {
         super.onPause();
         isForeground = false;
         JpushKit.onPause(this);
+        JanalyticsKit.onPageEnd(this, this.getClass().getCanonicalName());
     }
 
     @Override
@@ -80,12 +86,18 @@ public class MainActivity extends AppCompatActivity {
         soulPermissionUtils = new SoulPermissionUtils();
     }
 
+    /**
+     * 执行
+     */
     private void execute() {
         soulPermissionUtils.checkAndRequestPermission(this, Manifest.permission.WRITE_EXTERNAL_STORAGE, soulPermissionUtils,
                 true, new SoulPermissionUtils.CheckAndRequestPermissionCallBack() {
                     @Override
                     public void onPermissionOk() {
-
+                        // 事件
+                        event();
+                        // 注册消息接收器
+                        registerMessageReceiver();
                     }
 
                     @Override
@@ -101,6 +113,38 @@ public class MainActivity extends AppCompatActivity {
     }
 
     /**
+     * 事件
+     */
+    private void event() {
+        // 计数事件
+        Map<String, String> countExtMap = new HashMap<>(1);
+        countExtMap.put("计数key", "计数value");
+        JanalyticsKit.onCountEvent(this, "push_count_event_id", countExtMap);
+        // 计算事件
+        Map<String, String> calculateExtMap = new HashMap<>(1);
+        calculateExtMap.put("计算key", "计算value");
+        JanalyticsKit.onCalculateEvent(this, "push_calculate_event_id", 0.0D, calculateExtMap);
+        // 登录事件
+        Map<String, String> loginExtMap = new HashMap<>(1);
+        loginExtMap.put("登录key", "登录value");
+        JanalyticsKit.onLoginEvent(this, "login", true, loginExtMap);
+        // 注册事件
+        Map<String, String> registerExtMap = new HashMap<>(1);
+        registerExtMap.put("注册key", "注册value");
+        JanalyticsKit.onRegisterEvent(this, "register", true, registerExtMap);
+        // 浏览事件
+        Map<String, String> browseExtMap = new HashMap<>(1);
+        browseExtMap.put("浏览key", "浏览value");
+        JanalyticsKit.onBrowseEvent(this, "push_browse_content_id", "今日新闻",
+                "热点", 2000.0F, browseExtMap);
+        // 购买事件
+        Map<String, String> purchaseExtMap = new HashMap<>(1);
+        purchaseExtMap.put("购买key", "购买value");
+        JanalyticsKit.onPurchaseEvent(this, "push_purchase_goods_id", "短袖",
+                100.0D, true, Currency.CNY, "衣服", 1, purchaseExtMap);
+    }
+
+    /**
      * 注册消息接收器
      */
     public void registerMessageReceiver() {
@@ -111,6 +155,9 @@ public class MainActivity extends AppCompatActivity {
         LocalBroadcastManagerKit.getInstance(this).registerReceiver(messageReceiver, intentFilter);
     }
 
+    /**
+     * 消息接收器
+     */
     public class MessageReceiver extends BroadcastReceiver {
         @Override
         public void onReceive(Context context, Intent intent) {

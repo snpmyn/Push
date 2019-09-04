@@ -27,6 +27,17 @@
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+            <!--动态圈选（可选）需单添intent-filter-->
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+
+                <data
+                    android:host="jiguang"
+                    android:scheme="jiguang-41fb110f14c5e91a8bf06698" />
+            </intent-filter>
         </activity>
         <!--Jpush（极光推送消息接收器）-->
         <!-- Required since 3.0.7 -->

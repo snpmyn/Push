@@ -39,7 +39,9 @@ dependencies {
     implementation 'androidx.constraintlayout:constraintlayout:2.0.0-beta2'
     /*自带*/
     implementation project(path: ':jpush')
-    /*Jpush*/
+    /*JPush*/
+    implementation project(path: ':janalytics')
+    /*JAnalytics*/
     implementation 'com.jakewharton:butterknife:10.1.0'
     annotationProcessor 'com.jakewharton:butterknife-compiler:10.1.0'
     /*ButterKnife*/

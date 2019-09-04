@@ -1,10 +1,8 @@
 apply plugin: 'com.android.library'
-// 动态圈选插件（可选）
-// 集动态圈选功能后注释下行可关
-apply plugin: 'cn.jiguang.android.analytics'
 
 android {
     compileSdkVersion 29
+    buildToolsVersion "29.0.0"
 
 
     defaultConfig {
@@ -23,9 +21,8 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }
-    compileOptions {
-        sourceCompatibility 1.8
-        targetCompatibility 1.8
+    configurations.all {
+        resolutionStrategy.cacheChangingModulesFor 0, 'seconds'
     }
 }
 
@@ -34,8 +31,8 @@ dependencies {
 
     implementation 'androidx.appcompat:appcompat:1.1.0-rc01'
     /*自带*/
-    api project(path: ':jcore')
-    /*JCore（api以便于主模块调JCore下Util）*/
-    api 'cn.jiguang.sdk:jpush:3.3.4'
-    /*极光推送*/
+    api 'com.github.snpmyn:Util:master-SNAPSHOT'
+    /*util*/
+    api 'cn.jiguang.sdk:jcore:2.1.0'
+    /*JCore*/
 }

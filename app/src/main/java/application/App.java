@@ -6,6 +6,7 @@ import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 
+import com.zsp.janalytics.configure.JanalyticsInitConfigure;
 import com.zsp.jpush.configure.JpushInitConfigure;
 import com.zsp.push.BuildConfig;
 import com.zsp.utilone.activity.ActivitySuperviseManager;
@@ -27,6 +28,8 @@ public class App extends Application {
         registerActivityListener();
         // 极光推送
         JpushInitConfigure.initJpush(this, BuildConfig.DEBUG);
+        // 极光统计
+        JanalyticsInitConfigure.initJanalytics(this, BuildConfig.DEBUG);
     }
 
     /**
