@@ -2,6 +2,7 @@ package com.zsp.janalytics.kit;
 
 import android.content.Context;
 
+import java.util.HashMap;
 import java.util.Map;
 
 import cn.jiguang.analytics.android.api.BrowseEvent;
@@ -149,6 +150,25 @@ public class JanalyticsKit {
     }
 
     /**
+     * 计数事件
+     * <p>
+     * 自定计数事件模型扩展参数不可用key值event_id。
+     * 此类key已被模型用，用致统计数据不准确。
+     *
+     * @param context     上下文
+     * @param eventId     事件ID（非空）
+     * @param extMapKey   扩展参数键
+     * @param extMapValue 扩展参数值
+     */
+    public static void onCountEvent(Context context, String eventId, String extMapKey, String extMapValue) {
+        CountEvent countEvent = new CountEvent(eventId);
+        Map<String, String> extMap = new HashMap<>(1);
+        extMap.put(extMapKey, extMapValue);
+        countEvent.addExtMap(extMap);
+        onEvent(context, countEvent);
+    }
+
+    /**
      * 计算事件
      * <p>
      * 自定计算事件模型扩展参数不可用key值event_id、event_value。
@@ -161,6 +181,26 @@ public class JanalyticsKit {
      */
     public static void onCalculateEvent(Context context, String eventId, double eventValue, Map<String, String> extMap) {
         CalculateEvent calculateEvent = new CalculateEvent(eventId, eventValue);
+        calculateEvent.addExtMap(extMap);
+        onEvent(context, calculateEvent);
+    }
+
+    /**
+     * 计算事件
+     * <p>
+     * 自定计算事件模型扩展参数不可用key值event_id、event_value。
+     * 此类key已被模型用，用致统计数据不准确。
+     *
+     * @param context     上下文
+     * @param eventId     事件ID（非空）
+     * @param eventValue  事件值（非空）
+     * @param extMapKey   扩展参数键
+     * @param extMapValue 扩展参数值
+     */
+    public static void onCalculateEvent(Context context, String eventId, double eventValue, String extMapKey, String extMapValue) {
+        CalculateEvent calculateEvent = new CalculateEvent(eventId, eventValue);
+        Map<String, String> extMap = new HashMap<>(1);
+        extMap.put(extMapKey, extMapValue);
         calculateEvent.addExtMap(extMap);
         onEvent(context, calculateEvent);
     }
@@ -183,6 +223,26 @@ public class JanalyticsKit {
     }
 
     /**
+     * 登录事件
+     * <p>
+     * 自定登录事件模型扩展参数不可用key值login_method、login_success。
+     * 此类key已被模型用，用致统计数据不准确。
+     *
+     * @param context      上下文
+     * @param loginMethod  登录方式（非空）
+     * @param loginSuccess 登录成功（非空）
+     * @param extMapKey    扩展参数键
+     * @param extMapValue  扩展参数值
+     */
+    public static void onLoginEvent(Context context, String loginMethod, boolean loginSuccess, String extMapKey, String extMapValue) {
+        LoginEvent loginEvent = new LoginEvent(loginMethod, loginSuccess);
+        Map<String, String> extMap = new HashMap<>(1);
+        extMap.put(extMapKey, extMapValue);
+        loginEvent.addExtMap(extMap);
+        onEvent(context, loginEvent);
+    }
+
+    /**
      * 注册事件
      * <p>
      * 自定注册事件模型扩展参数不可用key值register_method、register_success。
@@ -195,6 +255,26 @@ public class JanalyticsKit {
      */
     public static void onRegisterEvent(Context context, String registerMethod, boolean registerSuccess, Map<String, String> extMap) {
         RegisterEvent registerEvent = new RegisterEvent(registerMethod, registerSuccess);
+        registerEvent.addExtMap(extMap);
+        onEvent(context, registerEvent);
+    }
+
+    /**
+     * 注册事件
+     * <p>
+     * 自定注册事件模型扩展参数不可用key值register_method、register_success。
+     * 此类key已被模型用，用致统计数据不准确。
+     *
+     * @param context         上下文
+     * @param registerMethod  注册方式（非空）
+     * @param registerSuccess 注册成功（非空）
+     * @param extMapKey       扩展参数键
+     * @param extMapValue     扩展参数值
+     */
+    public static void onRegisterEvent(Context context, String registerMethod, boolean registerSuccess, String extMapKey, String extMapValue) {
+        RegisterEvent registerEvent = new RegisterEvent(registerMethod, registerSuccess);
+        Map<String, String> extMap = new HashMap<>(1);
+        extMap.put(extMapKey, extMapValue);
         registerEvent.addExtMap(extMap);
         onEvent(context, registerEvent);
     }
@@ -214,6 +294,34 @@ public class JanalyticsKit {
      */
     public static void onBrowseEvent(Context context, String browseId, String browseName, String browseType, float browseDuration, Map<String, String> extMap) {
         BrowseEvent browseEvent = new BrowseEvent(browseId, browseName, browseType, browseDuration);
+        browseEvent.addExtMap(extMap);
+        onEvent(context, browseEvent);
+    }
+
+    /**
+     * 浏览事件
+     * <p>
+     * 自定浏览事件模型扩展参数不可用key值browse_content_id、browse_name、browse_type、browse_duration。
+     * 此类key已被模型用，用致统计数据不准确。
+     *
+     * @param context        上下文
+     * @param browseId       浏览内容ID（自定）
+     * @param browseName     浏览内容名（标题等，非空）
+     * @param browseType     浏览内容类型（如热点、汽车、财经等）
+     * @param browseDuration 浏览时长（单位秒）
+     * @param extMapKey      扩展参数键
+     * @param extMapValue    扩展参数值
+     */
+    public static void onBrowseEvent(Context context,
+                                     String browseId,
+                                     String browseName,
+                                     String browseType,
+                                     float browseDuration,
+                                     String extMapKey,
+                                     String extMapValue) {
+        BrowseEvent browseEvent = new BrowseEvent(browseId, browseName, browseType, browseDuration);
+        Map<String, String> extMap = new HashMap<>(1);
+        extMap.put(extMapKey, extMapValue);
         browseEvent.addExtMap(extMap);
         onEvent(context, browseEvent);
     }
@@ -244,6 +352,41 @@ public class JanalyticsKit {
                                        int purchaseGoodsCount,
                                        Map<String, String> extMap) {
         PurchaseEvent purchaseEvent = new PurchaseEvent(purchaseGoodsId, purchaseGoodsName, purchasePrice, purchaseSuccess, purchaseCurrency, purchaseGoodsType, purchaseGoodsCount);
+        purchaseEvent.addExtMap(extMap);
+        onEvent(context, purchaseEvent);
+
+    }
+
+    /**
+     * 购买事件
+     * <p>
+     * 自定购买事件模型扩展参数不可用key值purchase_goods_id、purchase_goods_name、purchase_price、purchase_currency、purchase_goods_type、purchase_quantity。
+     * 此类key已被模型用，用致统计数据不准确。
+     *
+     * @param context            上下文
+     * @param purchaseGoodsId    购买商品ID（自定）
+     * @param purchaseGoodsName  购买商品名
+     * @param purchasePrice      购买价格（非空）
+     * @param purchaseSuccess    购买成功（非空）
+     * @param purchaseCurrency   购买货币类型（人民币CNY、美元USD。详参枚举类Currency）
+     * @param purchaseGoodsType  购买商品类型（如衣服、手表等）
+     * @param purchaseGoodsCount 购买商品数量
+     * @param extMapKey          扩展参数键
+     * @param extMapValue        扩展参数值
+     */
+    public static void onPurchaseEvent(Context context,
+                                       String purchaseGoodsId,
+                                       String purchaseGoodsName,
+                                       double purchasePrice,
+                                       boolean purchaseSuccess,
+                                       Currency purchaseCurrency,
+                                       String purchaseGoodsType,
+                                       int purchaseGoodsCount,
+                                       String extMapKey,
+                                       String extMapValue) {
+        PurchaseEvent purchaseEvent = new PurchaseEvent(purchaseGoodsId, purchaseGoodsName, purchasePrice, purchaseSuccess, purchaseCurrency, purchaseGoodsType, purchaseGoodsCount);
+        Map<String, String> extMap = new HashMap<>(1);
+        extMap.put(extMapKey, extMapValue);
         purchaseEvent.addExtMap(extMap);
         onEvent(context, purchaseEvent);
 

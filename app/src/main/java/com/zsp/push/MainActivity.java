@@ -120,28 +120,36 @@ public class MainActivity extends AppCompatActivity {
         Map<String, String> countExtMap = new HashMap<>(1);
         countExtMap.put("计数key", "计数value");
         JanalyticsKit.onCountEvent(this, "push_count_event_id", countExtMap);
+        JanalyticsKit.onCountEvent(this, "push_count_event_id", "计数key", "计数value");
         // 计算事件
         Map<String, String> calculateExtMap = new HashMap<>(1);
         calculateExtMap.put("计算key", "计算value");
         JanalyticsKit.onCalculateEvent(this, "push_calculate_event_id", 0.0D, calculateExtMap);
+        JanalyticsKit.onCalculateEvent(this, "push_calculate_event_id", 0.0D, "计算key", "计算value");
         // 登录事件
         Map<String, String> loginExtMap = new HashMap<>(1);
         loginExtMap.put("登录key", "登录value");
         JanalyticsKit.onLoginEvent(this, "login", true, loginExtMap);
+        JanalyticsKit.onLoginEvent(this, "login", true, "登录key", "登录value");
         // 注册事件
         Map<String, String> registerExtMap = new HashMap<>(1);
         registerExtMap.put("注册key", "注册value");
         JanalyticsKit.onRegisterEvent(this, "register", true, registerExtMap);
+        JanalyticsKit.onRegisterEvent(this, "register", true, "注册key", "注册value");
         // 浏览事件
         Map<String, String> browseExtMap = new HashMap<>(1);
         browseExtMap.put("浏览key", "浏览value");
         JanalyticsKit.onBrowseEvent(this, "push_browse_content_id", "今日新闻",
                 "热点", 2000.0F, browseExtMap);
+        JanalyticsKit.onBrowseEvent(this, "push_browse_content_id", "今日新闻",
+                "热点", 2000.0F, "浏览key", "浏览value");
         // 购买事件
         Map<String, String> purchaseExtMap = new HashMap<>(1);
         purchaseExtMap.put("购买key", "购买value");
         JanalyticsKit.onPurchaseEvent(this, "push_purchase_goods_id", "短袖",
                 100.0D, true, Currency.CNY, "衣服", 1, purchaseExtMap);
+        JanalyticsKit.onPurchaseEvent(this, "push_purchase_goods_id", "短袖",
+                100.0D, true, Currency.CNY, "衣服", 1, "购买key", "购买value");
     }
 
     /**
