@@ -2,7 +2,11 @@ package com.zsp.janalytics.kit;
 
 import android.content.Context;
 
+import com.zsp.utilone.map.MapUtils;
+
+import java.util.Arrays;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import cn.jiguang.analytics.android.api.BrowseEvent;
@@ -155,16 +159,14 @@ public class JanalyticsKit {
      * 自定计数事件模型扩展参数不可用key值event_id。
      * 此类key已被模型用，用致统计数据不准确。
      *
-     * @param context     上下文
-     * @param eventId     事件ID（非空）
-     * @param extMapKey   扩展参数键
-     * @param extMapValue 扩展参数值
+     * @param context             上下文
+     * @param eventId             事件ID（非空）
+     * @param extMapKeysAndValues 扩展参数键值
      */
-    public static void onCountEvent(Context context, String eventId, String extMapKey, String extMapValue) {
+    public static void onCountEvent(Context context, String eventId, String... extMapKeysAndValues) {
         CountEvent countEvent = new CountEvent(eventId);
-        Map<String, String> extMap = new HashMap<>(1);
-        extMap.put(extMapKey, extMapValue);
-        countEvent.addExtMap(extMap);
+        List<String> list = Arrays.asList(extMapKeysAndValues);
+        countEvent.addExtMap(MapUtils.mapFromList(list));
         onEvent(context, countEvent);
     }
 
@@ -191,17 +193,15 @@ public class JanalyticsKit {
      * 自定计算事件模型扩展参数不可用key值event_id、event_value。
      * 此类key已被模型用，用致统计数据不准确。
      *
-     * @param context     上下文
-     * @param eventId     事件ID（非空）
-     * @param eventValue  事件值（非空）
-     * @param extMapKey   扩展参数键
-     * @param extMapValue 扩展参数值
+     * @param context             上下文
+     * @param eventId             事件ID（非空）
+     * @param eventValue          事件值（非空）
+     * @param extMapKeysAndValues 扩展参数键值
      */
-    public static void onCalculateEvent(Context context, String eventId, double eventValue, String extMapKey, String extMapValue) {
+    public static void onCalculateEvent(Context context, String eventId, double eventValue, String... extMapKeysAndValues) {
         CalculateEvent calculateEvent = new CalculateEvent(eventId, eventValue);
-        Map<String, String> extMap = new HashMap<>(1);
-        extMap.put(extMapKey, extMapValue);
-        calculateEvent.addExtMap(extMap);
+        List<String> list = Arrays.asList(extMapKeysAndValues);
+        calculateEvent.addExtMap(MapUtils.mapFromList(list));
         onEvent(context, calculateEvent);
     }
 
@@ -228,17 +228,15 @@ public class JanalyticsKit {
      * 自定登录事件模型扩展参数不可用key值login_method、login_success。
      * 此类key已被模型用，用致统计数据不准确。
      *
-     * @param context      上下文
-     * @param loginMethod  登录方式（非空）
-     * @param loginSuccess 登录成功（非空）
-     * @param extMapKey    扩展参数键
-     * @param extMapValue  扩展参数值
+     * @param context             上下文
+     * @param loginMethod         登录方式（非空）
+     * @param loginSuccess        登录成功（非空）
+     * @param extMapKeysAndValues 扩展参数键值
      */
-    public static void onLoginEvent(Context context, String loginMethod, boolean loginSuccess, String extMapKey, String extMapValue) {
+    public static void onLoginEvent(Context context, String loginMethod, boolean loginSuccess, String... extMapKeysAndValues) {
         LoginEvent loginEvent = new LoginEvent(loginMethod, loginSuccess);
-        Map<String, String> extMap = new HashMap<>(1);
-        extMap.put(extMapKey, extMapValue);
-        loginEvent.addExtMap(extMap);
+        List<String> list = Arrays.asList(extMapKeysAndValues);
+        loginEvent.addExtMap(MapUtils.mapFromList(list));
         onEvent(context, loginEvent);
     }
 
@@ -265,17 +263,15 @@ public class JanalyticsKit {
      * 自定注册事件模型扩展参数不可用key值register_method、register_success。
      * 此类key已被模型用，用致统计数据不准确。
      *
-     * @param context         上下文
-     * @param registerMethod  注册方式（非空）
-     * @param registerSuccess 注册成功（非空）
-     * @param extMapKey       扩展参数键
-     * @param extMapValue     扩展参数值
+     * @param context             上下文
+     * @param registerMethod      注册方式（非空）
+     * @param registerSuccess     注册成功（非空）
+     * @param extMapKeysAndValues 扩展参数键值
      */
-    public static void onRegisterEvent(Context context, String registerMethod, boolean registerSuccess, String extMapKey, String extMapValue) {
+    public static void onRegisterEvent(Context context, String registerMethod, boolean registerSuccess, String... extMapKeysAndValues) {
         RegisterEvent registerEvent = new RegisterEvent(registerMethod, registerSuccess);
-        Map<String, String> extMap = new HashMap<>(1);
-        extMap.put(extMapKey, extMapValue);
-        registerEvent.addExtMap(extMap);
+        List<String> list = Arrays.asList(extMapKeysAndValues);
+        registerEvent.addExtMap(MapUtils.mapFromList(list));
         onEvent(context, registerEvent);
     }
 

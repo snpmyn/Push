@@ -130,12 +130,14 @@ public class MainActivity extends AppCompatActivity {
         Map<String, String> loginExtMap = new HashMap<>(1);
         loginExtMap.put("登录key", "登录value");
         JanalyticsKit.onLoginEvent(this, "login", true, loginExtMap);
-        JanalyticsKit.onLoginEvent(this, "login", true, "登录key", "登录value");
+        JanalyticsKit.onLoginEvent(this, "login", true,
+                "登录keyOne", "登录valueOne", "登录keyTwo", "登录valueTwo");
         // 注册事件
         Map<String, String> registerExtMap = new HashMap<>(1);
         registerExtMap.put("注册key", "注册value");
         JanalyticsKit.onRegisterEvent(this, "register", true, registerExtMap);
-        JanalyticsKit.onRegisterEvent(this, "register", true, "注册key", "注册value");
+        JanalyticsKit.onRegisterEvent(this, "register", true,
+                "注册keyOne", "注册valueOne", "注册keyTwo", "注册valueTwo");
         // 浏览事件
         Map<String, String> browseExtMap = new HashMap<>(1);
         browseExtMap.put("浏览key", "浏览value");
