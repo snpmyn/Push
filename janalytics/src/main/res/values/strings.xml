@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">JAnalytics</string>
+    <string name="unknownError">未知错误</string>
 </resources>

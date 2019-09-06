@@ -2,13 +2,18 @@ package com.zsp.janalytics.kit;
 
 import android.content.Context;
 
+import com.zsp.janalytics.listener.JanalyticsListener;
+import com.zsp.janalytics.value.JanalyticsEnum;
 import com.zsp.utilone.map.MapUtils;
 
+import java.io.Serializable;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import cn.jiguang.analytics.android.api.Account;
+import cn.jiguang.analytics.android.api.AccountCallback;
 import cn.jiguang.analytics.android.api.BrowseEvent;
 import cn.jiguang.analytics.android.api.CalculateEvent;
 import cn.jiguang.analytics.android.api.CountEvent;
@@ -401,5 +406,78 @@ public class JanalyticsKit {
      */
     public static void setAnalyticsReportPeriod(Context context, int period) {
         JAnalyticsInterface.setAnalyticsReportPeriod(context, period);
+    }
+
+    /**
+     * 鉴定账户
+     *
+     * @param context            应用上下文
+     * @param accountId          账户ID
+     * @param creationTime       账户创时（时间戳）
+     * @param name               姓名
+     * @param sex                性别（0未知、1男、2女。默0，不可其它数字）
+     * @param paid               是否付费（0未知、1是、2否。默0，不可其它数字）
+     * @param birthday           出生年月（yyyyMMdd格式校验）
+     * @param phone              手机号码
+     * @param email              电子邮件
+     * @param weiBoId            新浪微博ID
+     * @param weChatId           微信ID
+     * @param qqId               QQ ID
+     * @param key                自定维度（只可字符串）
+     * @param value              自定维度
+     *                           只可字符串、数字类型、null。
+     *                           value空从服务器删key，key不可用极光内namespace（符号$）
+     * @param jAnalyticsListener 极光统计监听
+     */
+    public static void identifyAccount(final Context context,
+                                       String accountId,
+                                       long creationTime,
+                                       String name,
+                                       int sex,
+                                       int paid,
+                                       String birthday,
+                                       String phone,
+                                       String email,
+                                       String weiBoId,
+                                       String weChatId,
+                                       String qqId,
+                                       String key,
+                                       Object value,
+                                       final JanalyticsListener jAnalyticsListener) {
+        Account account = new Account(accountId);
+        account.setCreationTime(creationTime);
+        account.setName(name);
+        account.setSex(sex);
+        account.setPaid(paid);
+        account.setBirthdate(birthday);
+        account.setPhone(phone);
+        account.setEmail(email);
+        account.setWeiboId(weiBoId);
+        account.setWechatId(weChatId);
+        account.setQqId(qqId);
+        account.setExtraAttr(key, (Serializable) value);
+        JAnalyticsInterface.identifyAccount(context, account, new AccountCallback() {
+            @Override
+            public void callback(int code, String msg) {
+                jAnalyticsListener.callback(JanalyticsEnum.IDENTIFY, code, msg);
+            }
+        });
+    }
+
+    /**
+     * 分离用户
+     * <p>
+     * 解绑当前用户信息。
+     *
+     * @param context            应用上下文
+     * @param janalyticsListener 极光统计监听
+     */
+    public static void detachAccount(Context context, final JanalyticsListener janalyticsListener) {
+        JAnalyticsInterface.detachAccount(context, new AccountCallback() {
+            @Override
+            public void callback(int code, String msg) {
+                janalyticsListener.callback(JanalyticsEnum.DETACH, code, msg);
+            }
+        });
     }
 }

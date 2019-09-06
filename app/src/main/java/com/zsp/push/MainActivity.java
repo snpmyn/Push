@@ -7,11 +7,15 @@ import android.content.Intent;
 import android.content.IntentFilter;
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.view.View;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.zsp.janalytics.code.JanalyticsCode;
 import com.zsp.janalytics.kit.JanalyticsKit;
+import com.zsp.janalytics.listener.JanalyticsListener;
+import com.zsp.janalytics.value.JanalyticsEnum;
 import com.zsp.jpush.kit.JpushKit;
 import com.zsp.jpush.kit.LocalBroadcastManagerKit;
 import com.zsp.utilone.permission.SoulPermissionUtils;
@@ -20,6 +24,8 @@ import com.zsp.utilone.toast.ToastUtils;
 import java.util.HashMap;
 import java.util.Map;
 
+import butterknife.ButterKnife;
+import butterknife.OnClick;
 import cn.jiguang.analytics.android.api.Currency;
 import timber.log.Timber;
 
@@ -28,7 +34,7 @@ import timber.log.Timber;
  * @author: 郑少鹏
  * @date: 2019/5/31 12:11
  */
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements JanalyticsListener {
     /**
      * SoulPermissionUtils
      */
@@ -55,8 +61,9 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        ButterKnife.bind(this);
         initConfiguration();
-        execute();
+        startLogic();
     }
 
     @Override
@@ -86,10 +93,7 @@ public class MainActivity extends AppCompatActivity {
         soulPermissionUtils = new SoulPermissionUtils();
     }
 
-    /**
-     * 执行
-     */
-    private void execute() {
+    private void startLogic() {
         soulPermissionUtils.checkAndRequestPermission(this, Manifest.permission.WRITE_EXTERNAL_STORAGE, soulPermissionUtils,
                 true, new SoulPermissionUtils.CheckAndRequestPermissionCallBack() {
                     @Override
@@ -110,6 +114,22 @@ public class MainActivity extends AppCompatActivity {
 
                     }
                 });
+    }
+
+    @OnClick({R.id.mainActivityMbIdentifyAccount, R.id.mainActivityMbDetachAccount})
+    public void onViewClicked(View view) {
+        switch (view.getId()) {
+            // 鉴定账户
+            case R.id.mainActivityMbIdentifyAccount:
+                identifyAccount();
+                break;
+            // 分离账户
+            case R.id.mainActivityMbDetachAccount:
+                JanalyticsKit.detachAccount(getApplicationContext(), this);
+                break;
+            default:
+                break;
+        }
     }
 
     /**
@@ -185,6 +205,43 @@ public class MainActivity extends AppCompatActivity {
             } catch (Exception e) {
                 Timber.e(e);
             }
+        }
+    }
+
+    /**
+     * 鉴定账户
+     */
+    private void identifyAccount() {
+        JanalyticsKit.identifyAccount(getApplicationContext(),
+                "2",
+                System.currentTimeMillis(),
+                "本人",
+                1,
+                2,
+                "19880920",
+                "13673545415",
+                "snpmyn@126.com",
+                "1001",
+                "1002",
+                "1003",
+                "key",
+                "value",
+                this);
+    }
+
+    /**
+     * 回调
+     *
+     * @param janalyticsEnum 极光统计枚举
+     * @param code           码
+     * @param msg            消息
+     */
+    @Override
+    public void callback(JanalyticsEnum janalyticsEnum, int code, String msg) {
+        if (code == 0) {
+            ToastUtils.shortShow(this, janalyticsEnum == JanalyticsEnum.IDENTIFY ? "鉴定账户成功" : "分离用户成功");
+        } else {
+            JanalyticsCode.messageShow(this, code);
         }
     }
 }
