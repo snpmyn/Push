@@ -15,6 +15,11 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning">
+        <!--动态圈选（可选）必要Activity-->
+        <activity
+            android:name="cn.jiguang.analytics.android.view.BuryWebActivity"
+            android:screenOrientation="portrait"
+            android:theme="@android:style/Theme.NoTitleBar" />
         <activity android:name="jpush.display.JpushDisplayActivity">
             <intent-filter>
                 <action android:name="jpush.testAction" />
