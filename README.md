@@ -51,7 +51,7 @@ api 'cn.jiguang.sdk:janalytics:2.1.0'（避重）
 
 ### License
 ```
-Copyright [yyyy] [name of copyright owner]
+Copyright 2019 snpmyn
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
