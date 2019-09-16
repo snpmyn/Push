@@ -1,4 +1,7 @@
 apply plugin: 'com.android.library'
+// 动态圈选插件（可选）
+// 集动态圈选功能后注释下行可关
+apply plugin: 'cn.jiguang.android.analytics'
 
 android {
     compileSdkVersion 29

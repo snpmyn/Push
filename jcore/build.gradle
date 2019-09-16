@@ -33,6 +33,6 @@ dependencies {
     /*自带*/
     api 'com.github.snpmyn:Util:master-SNAPSHOT'
     /*util*/
-    api 'cn.jiguang.sdk:jcore:2.1.0'
+    api 'cn.jiguang.sdk:jcore:2.1.4'
     /*JCore*/
 }
