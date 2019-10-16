@@ -31,7 +31,7 @@ api 'cn.jiguang.sdk:janalytics:2.1.0'（避重）
 * implementation 'org.apache.commons:commons-lang3:3.9'
 
 ##### AndroidLibrary - UtilTwo
-* implementation 'androidx.core:core-ktx:1.2.0-alpha04'
+* implementation 'androidx.core:core-ktx:1.2.0-beta01'
 * implementation "org.jetbrains.kotlin:*kotlin-stdlib-jdk7*:$kotlin_version"
 
 ### 权限
