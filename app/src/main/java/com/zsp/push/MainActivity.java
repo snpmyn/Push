@@ -71,7 +71,7 @@ public class MainActivity extends AppCompatActivity implements JanalyticsListene
         super.onResume();
         isForeground = true;
         JpushKit.onResume(this);
-        JpushKit.requestPermission(getApplicationContext());
+        JpushKit.requestPermission(this);
         JanalyticsKit.onPageStart(this, this.getClass().getCanonicalName());
     }
 

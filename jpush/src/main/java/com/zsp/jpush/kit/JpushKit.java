@@ -153,7 +153,7 @@ public class JpushKit {
      * "android.permission.READ_EXTERNAL_STORAGE"
      * "android.permission.ACCESS_FINE_LOCATION"
      *
-     * @param context 应用上下文
+     * @param context 当前Activity上下文
      */
     public static void requestPermission(Context context) {
         JPushInterface.requestPermission(context);
