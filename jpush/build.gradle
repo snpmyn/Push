@@ -33,6 +33,6 @@ dependencies {
     /*自带*/
     api project(path: ':jcore')
     /*JCore（api以便于主模块调JCore下Util）*/
-    api 'cn.jiguang.sdk:jpush:3.3.6'
+    api 'cn.jiguang.sdk:jpush:3.3.8'
     /*极光推送*/
 }
