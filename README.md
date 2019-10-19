@@ -12,10 +12,10 @@
 #### 自身
 ##### AndroidLibrary - JCore
 * api 'com.github.snpmyn:*Util*:master-SNAPSHOT'（避重）
-* api 'cn.jiguang.sdk:jcore:2.1.0'（避重）
+* api 'cn.jiguang.sdk:jcore:2.1.4'（避重）
 
 ##### AndroidLibrary - JPush
-api 'cn.jiguang.sdk:jpush:3.3.4'（避重）
+api 'cn.jiguang.sdk:jpush:3.3.8'（避重）
 ##### AndroidLibrary - JAnalytics
 api 'cn.jiguang.sdk:janalytics:2.1.0'（避重）
 #### com.github.snpmyn:Util(api)
