@@ -22,6 +22,14 @@ public class App extends Application {
     @Override
     public void onCreate() {
         super.onCreate();
+        // 初始化配置
+        initConfiguration();
+    }
+
+    /**
+     * 初始化配置
+     */
+    private void initConfiguration() {
         // timber
         TimberInitConfigure.initTimber(BuildConfig.DEBUG);
         // 全局监听Activity生命周期
@@ -71,7 +79,7 @@ public class App extends Application {
             @Override
             public void onActivityDestroyed(@NonNull Activity activity) {
                 // 移监听到销事件Activity出集合
-                ActivitySuperviseManager.finishActivity(activity.getClass());
+                ActivitySuperviseManager.removeActivity(activity);
             }
         });
     }
