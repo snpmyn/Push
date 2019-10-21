@@ -15,6 +15,12 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning">
+        <activity android:name="jpush.display.JpushDisplayActivity">
+            <intent-filter>
+                <action android:name="jpush.testAction" />
+                <category android:name="jpush.testCategory" />
+            </intent-filter>
+        </activity>
         <activity
             android:name=".MainActivity"
             android:exported="true">
@@ -40,12 +46,6 @@
             android:name="cn.jiguang.analytics.android.view.BuryWebActivity"
             android:screenOrientation="portrait"
             android:theme="@android:style/Theme.NoTitleBar" />
-        <activity android:name="jpush.display.JpushDisplayActivity">
-            <intent-filter>
-                <action android:name="jpush.testAction" />
-                <category android:name="jpush.testCategory" />
-            </intent-filter>
-        </activity>
         <!--Jpush（极光推送消息接收器）-->
         <!-- Required since 3.0.7 -->
         <!-- 新tag/alias接口返结果需开发者配一自定广播 -->
