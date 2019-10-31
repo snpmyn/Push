@@ -24,6 +24,9 @@ android {
         sourceCompatibility 1.8
         targetCompatibility 1.8
     }
+    configurations.all {
+        resolutionStrategy.cacheChangingModulesFor 0, 'seconds'
+    }
 }
 
 dependencies {
@@ -31,8 +34,10 @@ dependencies {
 
     implementation 'androidx.appcompat:appcompat:1.1.0'
     /*自带*/
-    api project(path: ':jcore')
-    /*JCore（api以便于主模块调JCore下Util）*/
-    api 'cn.jiguang.sdk:jpush:3.3.8'
+    api 'com.github.snpmyn:Util:master-SNAPSHOT'
+    /*util*/
+    implementation 'cn.jiguang.sdk:jcore:2.1.4'
+    /*JCore*/
+    api 'cn.jiguang.sdk:jpush:3.3.9'
     /*极光推送*/
 }

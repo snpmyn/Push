@@ -23,7 +23,9 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }
-
+    configurations.all {
+        resolutionStrategy.cacheChangingModulesFor 0, 'seconds'
+    }
 }
 
 dependencies {
@@ -31,7 +33,9 @@ dependencies {
 
     implementation 'androidx.appcompat:appcompat:1.1.0'
     /*自带*/
-    implementation project(path: ':jcore')
+    implementation 'com.github.snpmyn:Util:master-SNAPSHOT'
+    /*util*/
+    implementation 'cn.jiguang.sdk:jcore:2.1.4'
     /*JCore*/
     api 'cn.jiguang.sdk:janalytics:2.1.0'
     /*极光统计*/

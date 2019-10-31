@@ -1,18 +1,24 @@
 <component name="ProjectDictionaryState">
   <dictionary name="MSI">
     <words>
+      <w>allprojects</w>
+      <w>appkey</w>
+      <w>buildscript</w>
       <w>bumptech</w>
       <w>codacy</w>
       <w>defind</w>
       <w>getkeepsafe</w>
       <w>jakewharton</w>
       <w>janalytics</w>
+      <w>jcenter</w>
       <w>jcore</w>
       <w>jiguang</w>
+      <w>jitpack</w>
       <w>jpush</w>
       <w>jpushdisplay</w>
       <w>litepal</w>
       <w>mmkv</w>
+      <w>pkgname</w>
       <w>pushcore</w>
       <w>relinker</w>
       <w>richpush</w>

@@ -1,1 +1,1 @@
-include ':app', ':jcore', ':jpush', ':janalytics'
+include ':app', ':jpush', ':janalytics'

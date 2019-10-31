@@ -6,50 +6,114 @@
 [![API](https://img.shields.io/badge/API-19%2B-brightgreen.svg?style=flat)](https://android-arsenal.com/api?level=19)
 
 ### 介绍
-极光推送
+极光推送。
 
-### 依赖
-#### 自身
-##### AndroidLibrary - JCore
-* api 'com.github.snpmyn:*Util*:master-SNAPSHOT'（避重）
-* api 'cn.jiguang.sdk:jcore:2.1.4'（避重）
+### 架构
 
-##### AndroidLibrary - JPush
-api 'cn.jiguang.sdk:jpush:3.3.8'（避重）
-##### AndroidLibrary - JAnalytics
-api 'cn.jiguang.sdk:janalytics:2.1.0'（避重）
-#### com.github.snpmyn:Util(api)
-##### AndroidLibrary - UtilOne
-* api 'com.github.bumptech.glide:glide:4.10.0'（避重）
-* api 'com.google.android.material:material:1.2.0-alpha01'（避重）
-* api 'io.reactivex:rxandroid:1.2.1'（避重）
-* api 'io.reactivex:rxjava:1.3.8'（避重）
-* api 'com.jakewharton.timber:timber:4.7.1'（避重）
-* api 'com.tencent:mmkv-static:1.0.23'（避重）
-* implementation 'com.getkeepsafe.relinker:relinker:1.3.1'
-* implementation 'com.qw:soulpermission:1.2.2_x'
-* implementation 'org.apache.commons:commons-lang3:3.9'
+| 模块 | 说明 |
+|:-:|:-:|
+| 示例app | 用法举例 |
+| 一方库Jpush | 推送集成实现 |
+| 一方库Janalytics | 统计集成实现 |
 
-##### AndroidLibrary - UtilTwo
-* implementation 'androidx.core:core-ktx:1.2.0-beta01'
-* implementation "org.jetbrains.kotlin:*kotlin-stdlib-jdk7*:$kotlin_version"
+### 依赖、权限
 
-### 权限
-#### AndroidLibrary - Jpush
-待补充
-#### AndroidLibrary - JAnalytics
-* android:name="android.permission.INTERNET"（避重）
-* android:name="android.permission.WAKE_LOCK"（避重）
-* android:name="android.permission.READ_PHONE_STATE"（避重）
-* android:name="android.permission.WRITE_EXTERNAL_STORAGE"（避重）
-* android:name="android.permission.READ_EXTERNAL_STORAGE"（避重）
-* android:name="android.permission.ACCESS_NETWORK_STATE"（避重）
-* android:name="android.permission.ACCESS_WIFI_STATE"（避重）
+| 模块 | 依赖 |
+|:-:|:-:|
+| 一方库(Jpush) | api 'com.github.snpmyn:*Util*:master-SNAPSHOT'（避重）|
+| 一方库(Jpush) | implementation 'cn.jiguang.sdk:jcore:2.1.4' |
+| 一方库(Jpush) | api 'cn.jiguang.sdk:jpush:3.3.9'（避重）|
+| 一方库(Janalytics) | implementation 'com.github.snpmyn:*Util*:master-SNAPSHOT' |
+| 一方库(Janalytics) | implementation 'cn.jiguang.sdk:jcore:2.1.4' |
+| 一方库(Janalytics) | api 'cn.jiguang.sdk:janalytics:2.1.0'（避重）|
+| 二方库(Util-UtilOne) | api 'com.github.bumptech.glide:glide:4.10.0'（避重）|
+| 二方库(Util-UtilOne) | api 'com.google.android.material:material:1.2.0-alpha01'（避重）|
+| 二方库(Util-UtilOne) | api 'io.reactivex:rxandroid:1.2.1'（避重）|
+| 二方库(Util-UtilOne) | api 'io.reactivex:rxjava:1.3.8'（避重）|
+| 二方库(Util-UtilOne) | api 'com.jakewharton.timber:timber:4.7.1'（避重）|
+| 二方库(Util-UtilOne) | api 'com.tencent:mmkv-static:1.0.23'（避重）|
+| 二方库(Util-UtilOne) | implementation 'com.getkeepsafe.relinker:relinker:1.3.1' |
+| 二方库(Util-UtilOne) | implementation 'com.qw:soulpermission:1.2.2_x' |
+| 二方库(Util-UtilOne) | implementation 'org.apache.commons:commons-lang3:3.9' |
+| 二方库(Util-UtilTwo) | implementation 'androidx.core:core-ktx:1.2.0-beta01' |
+| 二方库(Util-UtilTwo) | implementation "org.jetbrains.kotlin:*kotlin-stdlib-jdk7*:$kotlin_version" |
 
-#### com.github.snpmyn:Util
-##### app
-* android:name="android.permission.WRITE_EXTERNAL_STORAGE"（避重）
-* android:name="android.permission.READ_EXTERNAL_STORAGE"（避重）
+| 模块 | 权限 |
+|:-:|:-:|
+| 一方库(Jpush) | ... |
+| 一方库(Janalytics) | android:name="android.permission.INTERNET" |
+| 一方库(Janalytics) | android:name="android.permission.WAKE_LOCK" |
+| 一方库(Janalytics) | android:name="android.permission.READ_PHONE_STATE" |
+| 一方库(Janalytics) | android:name="android.permission.WRITE_EXTERNAL_STORAGE" |
+| 一方库(Janalytics) | android:name="android.permission.READ_EXTERNAL_STORAGE" |
+| 一方库(Janalytics) | android:name="android.permission.ACCESS_NETWORK_STATE" |
+| 一方库(Janalytics) | android:name="android.permission.ACCESS_WIFI_STATE" |
+| 二方库(Util-app) | android:name="android.permission.WRITE_EXTERNAL_STORAGE" |
+| 二方库(Util-app) | android:name="android.permission.READ_EXTERNAL_STORAGE" |
+
+### 使用
+build.gradle(module)
+```
+// Top-level build file where you can add configuration options common to all sub-projects/modules.
+
+buildscript {
+    repositories {
+        google()
+        jcenter()
+
+    }
+    dependencies {
+        classpath 'com.android.tools.build:gradle:3.5.1'
+        // 动态圈选插件（可选）
+        classpath 'cn.jiguang.android:janalytics-gradle-plugin:3.0.0'
+
+        // NOTE: Do not place your application dependencies here; they belong
+        // in the individual module build.gradle files
+    }
+}
+
+allprojects {
+    repositories {
+        google()
+        jcenter()
+        maven { url "https://jitpack.io" }
+    }
+}
+
+task clean(type: Delete) {
+    delete rootProject.buildDir
+}
+```
+build.gradle(app)
+```
+apply plugin: 'com.android.application'
+
+android {
+    compileSdkVersion 29
+    defaultConfig {
+        ...
+        ndk {
+            abiFilters 'armeabi-v7a'//,'armeabi','arm64-v8a','x86','x86_64','mips','mips64'
+        }
+        manifestPlaceholders = [
+                JPUSH_PKGNAME: applicationId,
+                // JPush注册包名对应AppKey
+                JPUSH_APPKEY : "xxx",
+                // 暂默值即可
+                JPUSH_CHANNEL: "developer-default",
+        ]
+    }  
+    compileOptions {
+        sourceCompatibility 1.8
+        targetCompatibility 1.8
+    }
+}
+
+dependencies {
+    implementation 'com.github.snpmyn.Push:jpush:master-SNAPSHOT'
+    implementation 'com.github.snpmyn.Push:janalytics:master-SNAPSHOT'
+}
+```
 
 ### License
 ```
