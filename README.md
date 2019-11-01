@@ -20,36 +20,36 @@
 
 | 模块 | 依赖 |
 |:-:|:-:|
-| 一方库(Jpush) | api 'com.github.snpmyn:*Util*:master-SNAPSHOT'（避重）|
-| 一方库(Jpush) | implementation 'cn.jiguang.sdk:jcore:2.1.4' |
-| 一方库(Jpush) | api 'cn.jiguang.sdk:jpush:3.3.9'（避重）|
-| 一方库(Janalytics) | implementation 'com.github.snpmyn:*Util*:master-SNAPSHOT' |
-| 一方库(Janalytics) | implementation 'cn.jiguang.sdk:jcore:2.1.4' |
-| 一方库(Janalytics) | api 'cn.jiguang.sdk:janalytics:2.1.0'（避重）|
-| 二方库(Util-UtilOne) | api 'com.github.bumptech.glide:glide:4.10.0'（避重）|
-| 二方库(Util-UtilOne) | api 'com.google.android.material:material:1.2.0-alpha01'（避重）|
-| 二方库(Util-UtilOne) | api 'io.reactivex:rxandroid:1.2.1'（避重）|
-| 二方库(Util-UtilOne) | api 'io.reactivex:rxjava:1.3.8'（避重）|
-| 二方库(Util-UtilOne) | api 'com.jakewharton.timber:timber:4.7.1'（避重）|
-| 二方库(Util-UtilOne) | api 'com.tencent:mmkv-static:1.0.23'（避重）|
-| 二方库(Util-UtilOne) | implementation 'com.getkeepsafe.relinker:relinker:1.3.1' |
-| 二方库(Util-UtilOne) | implementation 'com.qw:soulpermission:1.2.2_x' |
-| 二方库(Util-UtilOne) | implementation 'org.apache.commons:commons-lang3:3.9' |
-| 二方库(Util-UtilTwo) | implementation 'androidx.core:core-ktx:1.2.0-beta01' |
-| 二方库(Util-UtilTwo) | implementation "org.jetbrains.kotlin:*kotlin-stdlib-jdk7*:$kotlin_version" |
+| 一方库Jpush | api 'com.github.snpmyn:*Util*:master-SNAPSHOT'（避重）|
+| 一方库Jpush | implementation 'cn.jiguang.sdk:jcore:2.1.4' |
+| 一方库Jpush | api 'cn.jiguang.sdk:jpush:3.3.9'（避重）|
+| 一方库Janalytics | implementation 'com.github.snpmyn:*Util*:master-SNAPSHOT' |
+| 一方库Janalytics | implementation 'cn.jiguang.sdk:jcore:2.1.4' |
+| 一方库Janalytics | api 'cn.jiguang.sdk:janalytics:2.1.0'（避重）|
+| 二方库Util-UtilOne | api 'com.github.bumptech.glide:glide:4.10.0'（避重）|
+| 二方库Util-UtilOne | api 'com.google.android.material:material:1.2.0-alpha01'（避重）|
+| 二方库Util-UtilOne | api 'io.reactivex:rxandroid:1.2.1'（避重）|
+| 二方库Util-UtilOne | api 'io.reactivex:rxjava:1.3.8'（避重）|
+| 二方库Util-UtilOne | api 'com.jakewharton.timber:timber:4.7.1'（避重）|
+| 二方库Util-UtilOne | api 'com.tencent:mmkv-static:1.0.23'（避重）|
+| 二方库Util-UtilOne | implementation 'com.getkeepsafe.relinker:relinker:1.3.1' |
+| 二方库Util-UtilOne | implementation 'com.qw:soulpermission:1.2.2_x' |
+| 二方库Util-UtilOne | implementation 'org.apache.commons:commons-lang3:3.9' |
+| 二方库Util-UtilTwo | implementation 'androidx.core:core-ktx:1.2.0-beta01' |
+| 二方库Util-UtilTwo | implementation "org.jetbrains.kotlin:*kotlin-stdlib-jdk7*:$kotlin_version" |
 
 | 模块 | 权限 |
 |:-:|:-:|
-| 一方库(Jpush) | ... |
-| 一方库(Janalytics) | android:name="android.permission.INTERNET" |
-| 一方库(Janalytics) | android:name="android.permission.WAKE_LOCK" |
-| 一方库(Janalytics) | android:name="android.permission.READ_PHONE_STATE" |
-| 一方库(Janalytics) | android:name="android.permission.WRITE_EXTERNAL_STORAGE" |
-| 一方库(Janalytics) | android:name="android.permission.READ_EXTERNAL_STORAGE" |
-| 一方库(Janalytics) | android:name="android.permission.ACCESS_NETWORK_STATE" |
-| 一方库(Janalytics) | android:name="android.permission.ACCESS_WIFI_STATE" |
-| 二方库(Util-app) | android:name="android.permission.WRITE_EXTERNAL_STORAGE" |
-| 二方库(Util-app) | android:name="android.permission.READ_EXTERNAL_STORAGE" |
+| 一方库Jpush | 略 |
+| 一方库Janalytics | android:name="android.permission.INTERNET"（避重）|
+| 一方库Janalytics | android:name="android.permission.WAKE_LOCK"（避重）|
+| 一方库Janalytics | android:name="android.permission.READ_PHONE_STATE"（避重）|
+| 一方库Janalytics | android:name="android.permission.WRITE_EXTERNAL_STORAGE"（避重）|
+| 一方库Janalytics | android:name="android.permission.READ_EXTERNAL_STORAGE"（避重）|
+| 一方库Janalytics | android:name="android.permission.ACCESS_NETWORK_STATE"（避重）|
+| 一方库Janalytics | android:name="android.permission.ACCESS_WIFI_STATE"（避重）|
+| 二方库Util-app | android:name="android.permission.WRITE_EXTERNAL_STORAGE"（避重）|
+| 二方库Util-app | android:name="android.permission.READ_EXTERNAL_STORAGE"（避重）|
 
 ### 使用
 build.gradle(module)
@@ -106,6 +106,9 @@ android {
     compileOptions {
         sourceCompatibility 1.8
         targetCompatibility 1.8
+    }
+    configurations.all {
+        resolutionStrategy.cacheChangingModulesFor 0, 'seconds'
     }
 }
 
