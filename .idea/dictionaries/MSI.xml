@@ -16,8 +16,11 @@
       <w>jitpack</w>
       <w>jpush</w>
       <w>jpushdisplay</w>
+      <w>liberapay</w>
       <w>litepal</w>
       <w>mmkv</w>
+      <w>otechie</w>
+      <w>patreon</w>
       <w>pkgname</w>
       <w>pushcore</w>
       <w>relinker</w>
@@ -27,6 +30,8 @@
       <w>snpmyn</w>
       <w>soulpermission</w>
       <w>tencent</w>
+      <w>tidelift</w>
+      <w>usernames</w>
       <w>writted</w>
     </words>
   </dictionary>
