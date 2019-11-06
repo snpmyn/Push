@@ -63,7 +63,7 @@ buildscript {
 
     }
     dependencies {
-        classpath 'com.android.tools.build:gradle:3.5.1'
+        classpath 'com.android.tools.build:gradle:3.5.2'
         // 动态圈选插件（可选）
         classpath 'cn.jiguang.android:janalytics-gradle-plugin:3.0.0'
 
