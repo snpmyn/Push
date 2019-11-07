@@ -10,16 +10,18 @@
 
 ### 架构
 
-| 模块 | 说明 |
-|:-:|:-:|
-| 示例app | 用法举例 |
-| 一方库Jpush | 推送集成实现 |
-| 一方库Janalytics | 统计集成实现 |
+| 模块 | 说明 | 补充 |
+|:-:|:-:|:-:|
+| 示例app | 用法举例 | 无 |
+| 一方库Jpush | 推送集成实现 | 无 |
+| 一方库Janalytics | 统计集成实现 | 无 |
 
 ### 依赖、权限
 
 | 模块 | 依赖 |
 |:-:|:-:|
+| 示例app | implementation project(path: ':jpush') |
+| 示例app | implementation project(path: ':janalytics') |
 | 一方库Jpush | api 'com.github.snpmyn:*Util*:master-SNAPSHOT'（避重）|
 | 一方库Jpush | implementation 'cn.jiguang.sdk:jcore:2.1.4' |
 | 一方库Jpush | api 'cn.jiguang.sdk:jpush:3.3.9'（避重）|
@@ -40,6 +42,7 @@
 
 | 模块 | 权限 |
 |:-:|:-:|
+| 示例app | 无 |
 | 一方库Jpush | 略 |
 | 一方库Janalytics | android:name="android.permission.INTERNET"（避重）|
 | 一方库Janalytics | android:name="android.permission.WAKE_LOCK"（避重）|
@@ -50,6 +53,8 @@
 | 一方库Janalytics | android:name="android.permission.ACCESS_WIFI_STATE"（避重）|
 | 二方库Util-app | android:name="android.permission.WRITE_EXTERNAL_STORAGE"（避重）|
 | 二方库Util-app | android:name="android.permission.READ_EXTERNAL_STORAGE"（避重）|
+| 二方库Util-UtilOne | 无 |
+| 二方库Util-UtilTwo | 无 |
 
 ### 使用
 build.gradle(module)
