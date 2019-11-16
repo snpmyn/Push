@@ -24,7 +24,7 @@
 | 示例app | implementation project(path: ':janalytics') |
 | 一方库Jpush | api 'com.github.snpmyn:*Util*:master-SNAPSHOT'（避重）|
 | 一方库Jpush | implementation 'cn.jiguang.sdk:jcore:2.1.4' |
-| 一方库Jpush | api 'cn.jiguang.sdk:jpush:3.3.9'（避重）|
+| 一方库Jpush | api 'cn.jiguang.sdk:jpush:3.4.0'（避重）|
 | 一方库Janalytics | implementation 'com.github.snpmyn:*Util*:master-SNAPSHOT' |
 | 一方库Janalytics | implementation 'cn.jiguang.sdk:jcore:2.1.4' |
 | 一方库Janalytics | api 'cn.jiguang.sdk:janalytics:2.1.0'（避重）|
@@ -59,6 +59,9 @@
 | 二方库Util-UtilTwo | 无 |
 
 ### 使用
+> 版本快速迭代中，暂时使用`master-SNAPSHOT`版。<br>
+> 如获取不成功，请暂时查看源码。
+
 build.gradle(module)
 ```
 // Top-level build file where you can add configuration options common to all sub-projects/modules.
