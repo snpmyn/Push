@@ -22,10 +22,10 @@
 |:-:|:-:|
 | 示例app | implementation project(path: ':jpush') |
 | 示例app | implementation project(path: ':janalytics') |
-| 一方库Jpush | api 'com.github.snpmyn.Util:*utilone*:master-SNAPSHOT'（避重）|
+| 一方库Jpush | api 'com.github.snpmyn.Util:*utilone*:v1.0.1'（避重）|
 | 一方库Jpush | implementation 'cn.jiguang.sdk:jcore:2.1.4' |
 | 一方库Jpush | api 'cn.jiguang.sdk:jpush:3.4.0'（避重）|
-| 一方库Janalytics | implementation 'com.github.snpmyn.Util:*utilone*:master-SNAPSHOT' |
+| 一方库Janalytics | implementation 'com.github.snpmyn.Util:*utilone*:v1.0.1' |
 | 一方库Janalytics | implementation 'cn.jiguang.sdk:jcore:2.1.4' |
 | 一方库Janalytics | api 'cn.jiguang.sdk:janalytics:2.1.0'（避重）|
 | 二方库Util-示例app | implementation project(path: ':utilone') |
@@ -59,8 +59,8 @@
 | 二方库Util-UtilTwo | 无 |
 
 ### 使用
-> 版本快速迭代中，暂时使用`master-SNAPSHOT`版。<br>
-> 获取不成功请暂时查看源码。
+> [SECURITY](https://github.com/snpmyn/Push/blob/master/SECURITY.md)<br>
+> 版本快速迭代中，拉取失败暂时查看源码。
 
 build.gradle(module)
 ```
@@ -123,8 +123,8 @@ android {
 }
 
 dependencies {
-    implementation 'com.github.snpmyn.Push:jpush:master-SNAPSHOT'
-    implementation 'com.github.snpmyn.Push:janalytics:master-SNAPSHOT'
+    implementation 'com.github.snpmyn.Push:jpush:v1.0.1'
+    implementation 'com.github.snpmyn.Push:janalytics:v1.0.1'
 }
 ```
 
