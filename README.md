@@ -5,6 +5,10 @@
 [![GitHub license](https://img.shields.io/badge/license-Apache%20License%202.0-blue.svg?style=flat)](https://www.apache.org/licenses/LICENSE-2.0)
 [![API](https://img.shields.io/badge/API-19%2B-brightgreen.svg?style=flat)](https://android-arsenal.com/api?level=19)
 
+[![GitHub stars](https://img.shields.io/github/stars/Bigkoo/Push.svg?style=social)](https://github.com/Bigkoo/Push/stargazers) 
+[![GitHub forks](https://img.shields.io/github/forks/Bigkoo/Push.svg?style=social)](https://github.com/Bigkoo/Push/network) 
+[![GitHub watchers](https://img.shields.io/github/watchers/Bigkoo/Push.svg?style=social)](https://github.com/Bigkoo/Push/watchers)
+
 ### 介绍
 极光推送。
 
