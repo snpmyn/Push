@@ -4,24 +4,6 @@
     package="com.zsp.jpush">
 
     <!-- Required -->
-    <application>
-        <!--Jpush（极光推送公共服务）-->
-        <!-- Since JCore2.0.0 Required SDK核心功能 -->
-        <!-- android:process放Service于其它进程 -->
-        <!-- android:enabled不可false -->
-        <!-- 该自定Service继承极光JCommonService，使推送通道于更多手机平台更稳定 -->
-        <service
-            android:name=".service.JpushCommonService"
-            android:enabled="true"
-            android:exported="false"
-            android:process=":pushcore">
-            <intent-filter>
-                <action android:name="cn.jiguang.user.service.action" />
-            </intent-filter>
-        </service>
-    </application>
-
-    <!-- Required -->
     <permission
         android:name="${applicationId}.permission.JPUSH_MESSAGE"
         android:protectionLevel="signature"
@@ -50,5 +32,23 @@
     <uses-permission android:name="android.permission.CHANGE_NETWORK_STATE" />
     <uses-permission android:name="android.permission.GET_TASKS" />
     <uses-permission android:name="android.permission.VIBRATE" />
+
+    <!-- Required -->
+    <application>
+        <!--Jpush（极光推送公共服务）-->
+        <!-- Since JCore2.0.0 Required SDK核心功能 -->
+        <!-- android:process放Service于其它进程 -->
+        <!-- android:enabled不可false -->
+        <!-- 该自定Service继承极光JCommonService，使推送通道于更多手机平台更稳定 -->
+        <service
+            android:name=".service.JpushCommonService"
+            android:enabled="true"
+            android:exported="false"
+            android:process=":pushcore">
+            <intent-filter>
+                <action android:name="cn.jiguang.user.service.action" />
+            </intent-filter>
+        </service>
+    </application>
 
 </manifest>
