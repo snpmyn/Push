@@ -35,8 +35,8 @@ public class ExampleKit {
     /**
      * Pattern
      */
-    private static Pattern p1 = Pattern.compile("^[\u4E00-\u9FA50-9a-zA-Z_!@#$&*+=.|]+$");
-    private static Pattern p2 = Pattern.compile("[\\x20-\\x7E]+");
+    private static final Pattern P1 = Pattern.compile("^[\u4E00-\u9FA50-9a-zA-Z_!@#$&*+=.|]+$");
+    private static final Pattern P2 = Pattern.compile("[\\x20-\\x7E]+");
 
     /**
      * 手机号有效否
@@ -62,7 +62,7 @@ public class ExampleKit {
      * @return Tag和Alias有效否
      */
     public static boolean isValidTagAndAlias(String string) {
-        Matcher m = p1.matcher(string);
+        Matcher m = P1.matcher(string);
         return m.matches();
     }
 
@@ -111,7 +111,7 @@ public class ExampleKit {
             return false;
         }
         try {
-            return p2.matcher(string).matches();
+            return P2.matcher(string).matches();
         } catch (Throwable e) {
             return true;
         }

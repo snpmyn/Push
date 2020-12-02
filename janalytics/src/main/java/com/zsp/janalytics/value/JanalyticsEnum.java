@@ -15,10 +15,6 @@ public enum JanalyticsEnum {
      * 分离
      */
     DETACH(2);
-    /**
-     * 标志
-     */
-    private int flag;
 
     /**
      * constructor
@@ -26,6 +22,5 @@ public enum JanalyticsEnum {
      * @param flag 标志
      */
     JanalyticsEnum(int flag) {
-        this.flag = flag;
     }
 }

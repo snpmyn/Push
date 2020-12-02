@@ -46,6 +46,44 @@ public class JpushCustomReceiver extends BroadcastReceiver {
     private static final int ACTION_RICHPUSH_CALLBACK = 104;
     private static final int ACTION_CONNECTION_CHANGE = 105;
 
+    @Override
+    public void onReceive(Context context, Intent intent) {
+        try {
+            Bundle bundle = intent.getExtras();
+            if (bundle != null) {
+                Timber.d("[JpushCustomReceiver] onReceive - %s, extras: %s", intent.getAction(), printBundle(bundle));
+                MyHandler myHandler = new MyHandler(context);
+                Message message = Message.obtain();
+                message.obj = bundle;
+                if (JPushInterface.ACTION_REGISTRATION_ID.equals(intent.getAction())) {
+                    Timber.d("[JpushCustomReceiver] Registration Id: %s", bundle.getString(JPushInterface.EXTRA_REGISTRATION_ID));
+                    message.arg1 = ACTION_REGISTRATION_ID;
+                } else if (JPushInterface.ACTION_MESSAGE_RECEIVED.equals(intent.getAction())) {
+                    Timber.d("[JpushCustomReceiver] 推来的自定消息：%s", bundle.getString(JPushInterface.EXTRA_MESSAGE));
+                    message.arg1 = ACTION_MESSAGE_RECEIVED;
+                } else if (JPushInterface.ACTION_NOTIFICATION_RECEIVED.equals(intent.getAction())) {
+                    Timber.d("[JpushCustomReceiver] 推来的通知");
+                    Timber.d("[JpushCustomReceiver] 推来的通知ID：%s", bundle.getInt(JPushInterface.EXTRA_NOTIFICATION_ID));
+                    message.arg1 = ACTION_NOTIFICATION_RECEIVED;
+                } else if (JPushInterface.ACTION_NOTIFICATION_OPENED.equals(intent.getAction())) {
+                    Timber.d("[JpushCustomReceiver] 点击打开通知");
+                    message.arg1 = ACTION_NOTIFICATION_OPENED;
+                } else if (JPushInterface.ACTION_RICHPUSH_CALLBACK.equals(intent.getAction())) {
+                    Timber.d("[JpushCustomReceiver] RICH PUSH CALLBACK: %s", bundle.getString(JPushInterface.EXTRA_EXTRA));
+                    message.arg1 = ACTION_RICHPUSH_CALLBACK;
+                } else if (JPushInterface.ACTION_CONNECTION_CHANGE.equals(intent.getAction())) {
+                    Timber.d("[JpushCustomReceiver] %s connected state change to %s", intent.getAction(), intent.getBooleanExtra(JPushInterface.EXTRA_CONNECTION_CHANGE, false));
+                    message.arg1 = ACTION_CONNECTION_CHANGE;
+                } else {
+                    Timber.d("[JpushCustomReceiver] Unhandled intent - %s", intent.getAction());
+                }
+                myHandler.sendMessage(message);
+            }
+        } catch (Exception e) {
+            Timber.e(e);
+        }
+    }
+
     /**
      * 打印数据
      *
@@ -90,85 +128,6 @@ public class JpushCustomReceiver extends BroadcastReceiver {
     }
 
     /**
-     * 消息被收
-     *
-     * @param context 上下文
-     * @param bundle  数据
-     */
-    private static void messageReceived(Context context, Bundle bundle) {
-        if (MainActivity.isForeground) {
-            String message = bundle.getString(JPushInterface.EXTRA_MESSAGE);
-            String extra = bundle.getString(JPushInterface.EXTRA_EXTRA);
-            Intent intent = new Intent(MainActivity.ACTION_MESSAGE_RECEIVED);
-            intent.putExtra(MainActivity.KEY_MESSAGE, message);
-            if (!TextUtils.isEmpty(extra)) {
-                try {
-                    JSONObject extraJson = new JSONObject(extra);
-                    if (extraJson.length() > 0) {
-                        intent.putExtra(MainActivity.KEY_EXTRAS, extra);
-                    }
-                } catch (JSONException e) {
-                    Timber.e(e);
-                }
-            }
-            LocalBroadcastManagerKit.getInstance(context).sendBroadcast(intent);
-        }
-    }
-
-    @Override
-    public void onReceive(Context context, Intent intent) {
-        try {
-            Bundle bundle = intent.getExtras();
-            if (bundle != null) {
-                Timber.d("[JpushCustomReceiver] onReceive - %s, extras: %s", intent.getAction(), printBundle(bundle));
-                MyHandler myHandler = new MyHandler(context);
-                Message message = Message.obtain();
-                message.obj = bundle;
-                if (JPushInterface.ACTION_REGISTRATION_ID.equals(intent.getAction())) {
-                    Timber.d("[JpushCustomReceiver] Registration Id: %s", bundle.getString(JPushInterface.EXTRA_REGISTRATION_ID));
-                    message.arg1 = ACTION_REGISTRATION_ID;
-                } else if (JPushInterface.ACTION_MESSAGE_RECEIVED.equals(intent.getAction())) {
-                    Timber.d("[JpushCustomReceiver] 推来的自定消息：%s", bundle.getString(JPushInterface.EXTRA_MESSAGE));
-                    message.arg1 = ACTION_MESSAGE_RECEIVED;
-                } else if (JPushInterface.ACTION_NOTIFICATION_RECEIVED.equals(intent.getAction())) {
-                    Timber.d("[JpushCustomReceiver] 推来的通知");
-                    Timber.d("[JpushCustomReceiver] 推来的通知ID：%s", bundle.getInt(JPushInterface.EXTRA_NOTIFICATION_ID));
-                    message.arg1 = ACTION_NOTIFICATION_RECEIVED;
-                } else if (JPushInterface.ACTION_NOTIFICATION_OPENED.equals(intent.getAction())) {
-                    Timber.d("[JpushCustomReceiver] 点击打开通知");
-                    message.arg1 = ACTION_NOTIFICATION_OPENED;
-                } else if (JPushInterface.ACTION_RICHPUSH_CALLBACK.equals(intent.getAction())) {
-                    Timber.d("[JpushCustomReceiver] RICH PUSH CALLBACK: %s", bundle.getString(JPushInterface.EXTRA_EXTRA));
-                    message.arg1 = ACTION_RICHPUSH_CALLBACK;
-                } else if (JPushInterface.ACTION_CONNECTION_CHANGE.equals(intent.getAction())) {
-                    Timber.d("[JpushCustomReceiver] %s connected state change to %s", intent.getAction(), intent.getBooleanExtra(JPushInterface.EXTRA_CONNECTION_CHANGE, false));
-                    message.arg1 = ACTION_CONNECTION_CHANGE;
-                } else {
-                    Timber.d("[JpushCustomReceiver] Unhandled intent - %s", intent.getAction());
-                }
-                myHandler.sendMessage(message);
-            }
-        } catch (Exception e) {
-            Timber.e(e);
-        }
-    }
-
-    /**
-     * 通知被打开
-     *
-     * @param bundle 数据
-     */
-    private static void notificationOpened(Bundle bundle) {
-        Activity activity = ActivitySuperviseManager.getTopActivityInstance();
-        if (activity != null) {
-            Intent intent = new Intent(activity, JpushDisplayActivity.class);
-            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP);
-            intent.putExtras(bundle);
-            /*activity.startActivity(intent);*/
-        }
-    }
-
-    /**
      * MyHandler
      * <p>
      * 引用关系链Looper -> MessageQueue -> Message -> Handler -> Activity。
@@ -180,7 +139,7 @@ public class JpushCustomReceiver extends BroadcastReceiver {
      * Activity退移所有信息后Handler与Activity生命周期同步。
      */
     private static class MyHandler extends Handler {
-        private WeakReference<Context> weakReference;
+        private final WeakReference<Context> weakReference;
 
         MyHandler(Context context) {
             weakReference = new WeakReference<>(context);
@@ -214,6 +173,47 @@ public class JpushCustomReceiver extends BroadcastReceiver {
                 default:
                     break;
             }
+        }
+    }
+
+    /**
+     * 消息被收
+     *
+     * @param context 上下文
+     * @param bundle  数据
+     */
+    private static void messageReceived(Context context, Bundle bundle) {
+        if (MainActivity.isForeground) {
+            String message = bundle.getString(JPushInterface.EXTRA_MESSAGE);
+            String extra = bundle.getString(JPushInterface.EXTRA_EXTRA);
+            Intent intent = new Intent(MainActivity.ACTION_MESSAGE_RECEIVED);
+            intent.putExtra(MainActivity.KEY_MESSAGE, message);
+            if (!TextUtils.isEmpty(extra)) {
+                try {
+                    JSONObject extraJson = new JSONObject(extra);
+                    if (extraJson.length() > 0) {
+                        intent.putExtra(MainActivity.KEY_EXTRAS, extra);
+                    }
+                } catch (JSONException e) {
+                    Timber.e(e);
+                }
+            }
+            LocalBroadcastManagerKit.getInstance(context).sendBroadcast(intent);
+        }
+    }
+
+    /**
+     * 通知被打开
+     *
+     * @param bundle 数据
+     */
+    private static void notificationOpened(Bundle bundle) {
+        Activity activity = ActivitySuperviseManager.getTopActivityInstance();
+        if (activity != null) {
+            Intent intent = new Intent(activity, JpushDisplayActivity.class);
+            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP);
+            intent.putExtras(bundle);
+            /*activity.startActivity(intent);*/
         }
     }
 }

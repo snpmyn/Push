@@ -26,7 +26,7 @@ import timber.log.Timber;
  * @date: 2019/5/31 14:53
  */
 public class JpushMessageReceiver extends JPushMessageReceiver {
-    private JpushMessageReceiverKit jpushMessageReceiverKit;
+    private final JpushMessageReceiverKit jpushMessageReceiverKit;
 
     public JpushMessageReceiver() {
         super();

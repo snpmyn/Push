@@ -1,5 +1,6 @@
 package jpush.display;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
 import android.widget.TextView;
@@ -19,10 +20,13 @@ import value.PushConstant;
  * @date: 2019/5/31 16:09
  */
 public class JpushDisplayActivity extends AppCompatActivity {
+    @SuppressLint("NonConstantResourceId")
     @BindView(R.id.jpushDisplayActivityMt)
     MaterialToolbar jpushDisplayActivityMt;
+    @SuppressLint("NonConstantResourceId")
     @BindView(R.id.jpushDisplayActivityTvTitle)
     TextView jpushDisplayActivityTvTitle;
+    @SuppressLint("NonConstantResourceId")
     @BindView(R.id.jpushDisplayActivityTvContent)
     TextView jpushDisplayActivityTvContent;
     /**

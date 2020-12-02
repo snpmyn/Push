@@ -1,6 +1,7 @@
 package com.zsp.push;
 
 import android.Manifest;
+import android.annotation.SuppressLint;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
@@ -116,6 +117,7 @@ public class MainActivity extends AppCompatActivity implements JanalyticsListene
                 });
     }
 
+    @SuppressLint("NonConstantResourceId")
     @OnClick({R.id.mainActivityMbIdentifyAccount, R.id.mainActivityMbDetachAccount})
     public void onViewClicked(View view) {
         switch (view.getId()) {
