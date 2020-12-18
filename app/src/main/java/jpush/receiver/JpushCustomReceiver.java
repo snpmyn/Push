@@ -6,6 +6,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
+import android.os.Looper;
 import android.os.Message;
 import android.text.TextUtils;
 
@@ -52,7 +53,7 @@ public class JpushCustomReceiver extends BroadcastReceiver {
             Bundle bundle = intent.getExtras();
             if (bundle != null) {
                 Timber.d("[JpushCustomReceiver] onReceive - %s, extras: %s", intent.getAction(), printBundle(bundle));
-                MyHandler myHandler = new MyHandler(context);
+                MyHandler myHandler = new MyHandler(context.getMainLooper(), context);
                 Message message = Message.obtain();
                 message.obj = bundle;
                 if (JPushInterface.ACTION_REGISTRATION_ID.equals(intent.getAction())) {
@@ -141,8 +142,9 @@ public class JpushCustomReceiver extends BroadcastReceiver {
     private static class MyHandler extends Handler {
         private final WeakReference<Context> weakReference;
 
-        MyHandler(Context context) {
-            weakReference = new WeakReference<>(context);
+        public MyHandler(@NonNull Looper looper, Context context) {
+            super(looper);
+            this.weakReference = new WeakReference<>(context);
         }
 
         @Override

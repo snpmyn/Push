@@ -2,9 +2,11 @@ package application;
 
 import android.app.Activity;
 import android.app.Application;
+import android.content.Context;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
+import androidx.multidex.MultiDex;
 
 import com.zsp.janalytics.configure.JanalyticsInitConfigure;
 import com.zsp.jpush.configure.JpushInitConfigure;
@@ -24,6 +26,12 @@ public class App extends Application {
         super.onCreate();
         // 初始化配置
         initConfiguration();
+    }
+
+    @Override
+    protected void attachBaseContext(Context base) {
+        super.attachBaseContext(base);
+        MultiDex.install(this);
     }
 
     /**

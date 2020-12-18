@@ -46,12 +46,12 @@ public class TagAliasMobileNumberOperatorKit {
     private static final int ACTION_CHECK = 6;
     private static final int DELAY_SEND_ACTION = 1;
     private static final int DELAY_SET_MOBILE_NUMBER_ACTION = 2;
+    @SuppressLint("StaticFieldLeak")
     private static TagAliasMobileNumberOperatorKit mInstance;
     private static int sequence = 1;
     private Context context;
     private final SparseArray<Object> setActionCache = new SparseArray<>();
-    @SuppressLint("HandlerLeak")
-    private final Handler delaySendHandler = new Handler() {
+    private final Handler delaySendHandler = new Handler(context.getMainLooper()) {
         @Override
         public void handleMessage(Message msg) {
             switch (msg.what) {

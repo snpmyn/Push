@@ -54,6 +54,7 @@ public final class LocalBroadcastManagerKit {
         }
     }
 
+    @SuppressWarnings("rawtypes")
     public void registerReceiver(BroadcastReceiver receiver, IntentFilter filter) {
         synchronized (this.mReceivers) {
             ReceiverRecord entry = new ReceiverRecord(filter, receiver);
@@ -75,6 +76,7 @@ public final class LocalBroadcastManagerKit {
         }
     }
 
+    @SuppressWarnings("rawtypes")
     public void unregisterReceiver(BroadcastReceiver receiver) {
         synchronized (this.mReceivers) {
             ArrayList filters = this.mReceivers.remove(receiver);
@@ -102,6 +104,7 @@ public final class LocalBroadcastManagerKit {
         }
     }
 
+    @SuppressWarnings("rawtypes")
     public boolean sendBroadcast(Intent intent) {
         synchronized (this.mReceivers) {
             String action = intent.getAction();
@@ -127,7 +130,7 @@ public final class LocalBroadcastManagerKit {
                     }
                     if (receiver.broadcasting) {
                         if (debug) {
-                            Timber.d("  Filter\'s target already added");
+                            Timber.d("  Filter's target already added");
                         }
                     } else {
                         int match = receiver.filter.match(action, type, scheme, data, categories, TAG);

@@ -101,9 +101,9 @@ public class ExampleKit {
     }
 
     static boolean isConnected(Context context) {
-        ConnectivityManager conn = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
-        NetworkInfo info = conn.getActiveNetworkInfo();
-        return (info != null && info.isConnected());
+        ConnectivityManager connectivityManager = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkInfo networkInfo = connectivityManager.getActiveNetworkInfo();
+        return (networkInfo != null && networkInfo.isConnected());
     }
 
     private static boolean isReadableAscii(CharSequence string) {
