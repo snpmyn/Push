@@ -36,8 +36,8 @@ dependencies {
     /*自带*/
     api 'com.github.snpmyn.Util:utilone:v0.1'
     /*util*/
-    implementation 'cn.jiguang.sdk:jcore:2.1.4'
+    implementation 'cn.jiguang.sdk:jcore:2.6.0'
     /*JCore*/
-    api 'cn.jiguang.sdk:jpush:3.4.0'
+    api 'cn.jiguang.sdk:jpush:3.9.0'
     /*极光推送*/
 }

@@ -35,6 +35,34 @@
 
     <!-- Required -->
     <application>
+
+        <!--极光富媒体或极光早上好功能需设此 Activity 之 exported 为 true 覆盖 jcenter 上组件-->
+        <activity
+            android:name="cn.jpush.android.ui.PopWinActivity"
+            android:exported="true"
+            android:theme="@style/MyDialogStyle"
+            tools:node="replace">
+            <intent-filter>
+                <category android:name="android.intent.category.DEFAULT" />
+                <action android:name="cn.jpush.android.ui.PopWinActivity" />
+                <category android:name="${applicationId}" />
+            </intent-filter>
+        </activity>
+        <!--极光富媒体或极光早上好功能需设此 Activity 之 exported 为 true 覆盖 jcenter 上组件-->
+        <activity
+            android:name="cn.jpush.android.ui.PushActivity"
+            android:configChanges="orientation|keyboardHidden"
+            android:exported="true"
+            android:theme="@android:style/Theme.NoTitleBar"
+            tools:node="replace">
+            <intent-filter>
+                <action android:name="cn.jpush.android.ui.PushActivity" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="${applicationId}" />
+            </intent-filter>
+        </activity>
+
         <!--Jpush（极光推送公共服务）-->
         <!-- Since JCore2.0.0 Required SDK核心功能 -->
         <!-- android:process放Service于其它进程 -->
