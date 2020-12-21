@@ -25,11 +25,11 @@
 | 示例app | implementation project(path: ':jpush') |
 | 示例app | implementation project(path: ':janalytics') |
 | 一方库Jpush | api 'com.github.snpmyn.Util:*utilone*:v0.1'（避重）|
-| 一方库Jpush | implementation 'cn.jiguang.sdk:jcore:2.1.4' |
-| 一方库Jpush | api 'cn.jiguang.sdk:jpush:3.4.0'（避重）|
+| 一方库Jpush | implementation 'cn.jiguang.sdk:jcore:2.6.0' |
+| 一方库Jpush | api 'cn.jiguang.sdk:jpush:3.9.0'（避重）|
 | 一方库Janalytics | implementation 'com.github.snpmyn.Util:*utilone*:v0.1' |
-| 一方库Janalytics | implementation 'cn.jiguang.sdk:jcore:2.1.4' |
-| 一方库Janalytics | api 'cn.jiguang.sdk:janalytics:2.1.0'（避重）|
+| 一方库Janalytics | implementation 'cn.jiguang.sdk:jcore:2.6.0' |
+| 一方库Janalytics | api 'cn.jiguang.sdk:janalytics:2.1.2'（避重）|
 | 二方库Util-示例app | implementation project(path: ':utilone') |
 | 二方库Util-示例app | implementation project(path: ':utiltwo') |
 | 二方库Util-UtilOne | api 'com.github.bumptech.glide:glide:4.11.0'（避重）|
