@@ -13,15 +13,18 @@ import timber.log.Timber;
 
 /**
  * @decs: 极光推送消息接收器
- * 3.0.7+新增回调方式。
+ * 3.0.7+ 新增回调方式。
  * <p>
  * 1.新消息回调方式相关回调类。
- * 2.新tag与alias操作回调于开发者自定该类子类中触发。
+ * 2.新 tag 与 alias 操作回调于开发者自定该类子类中触发。
  * 3.手机号设置回调于开发者自定该类子类中触发。
- * 4.新回调方式同旧自定Receiver兼容，配该Receiver后默亦发广播至旧Receiver。
- * 重写onMessage、onNotifyMessageArrived、onNotifyMessageOpened、onMultiActionClicked需调super才发广播至旧Receiver。
+ * 4.新回调方式同旧自定 Receiver 兼容，配该 Receiver 后默亦发广播至旧 Receiver。
+ * 重写 onMessage、onNotifyMessageArrived、onNotifyMessageOpened、onMultiActionClicked 需调 super 才发广播至旧 Receiver。
  * <p>
  * 该类为回调父类，开发者需继承该类并于清单文件配对应实现类，接口操作结果于所配类下法回调。
+ * <p>
+ * 该回调类虽基于 BroadcastReceiver，但为加快回调速度，在 SDK 内部会判断进程。
+ * 当触发进程与组件配置进程一致时，内部采用 Java 对象的回调方式，并不产生 Android 组件生命周期，故不建议在该类中声明 Handler 属性。
  * @author: 郑少鹏
  * @date: 2019/5/31 14:53
  */
@@ -86,19 +89,19 @@ public class JpushMessageReceiver extends JPushMessageReceiver {
     @Override
     public void onTagOperatorResult(Context context, JPushMessage jPushMessage) {
         super.onTagOperatorResult(context, jPushMessage);
-        Timber.d("【onTagOperatorResult】tag增删查改于此法回调结果");
+        Timber.d("【onTagOperatorResult】tag 增删查改于此法回调结果");
     }
 
     @Override
     public void onCheckTagOperatorResult(Context context, JPushMessage jPushMessage) {
         super.onCheckTagOperatorResult(context, jPushMessage);
-        Timber.d("【onCheckTagOperatorResult】查某tag与当前用户绑状于此法回调结果");
+        Timber.d("【onCheckTagOperatorResult】查某 tag 与当前用户绑状于此法回调结果");
     }
 
     @Override
     public void onAliasOperatorResult(Context context, JPushMessage jPushMessage) {
         super.onAliasOperatorResult(context, jPushMessage);
-        Timber.d("【onAliasOperatorResult】alias相关操作于此法回调结果");
+        Timber.d("【onAliasOperatorResult】alias 相关操作于此法回调结果");
     }
 
     @Override

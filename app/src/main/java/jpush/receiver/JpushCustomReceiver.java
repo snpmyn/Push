@@ -33,9 +33,12 @@ import timber.log.Timber;
  * 2.正常收通知（点默打开应用主页）
  * <p>
  * 注：
- * 3.3.0+用新消息回调方式。
- * 仍需该Receiver接回调，则用新回调方式不重写对应回调法，或重写回调法且调super。
- * 无需该Receiver接回调，则用新回调方式重写对应回调法且不调super。
+ * 3.3.0+ 用新消息回调方式。
+ * 仍需该 Receiver 接回调，则用新回调方式不重写对应回调法，或重写回调法且调 super。
+ * 无需该 Receiver 接回调，则用新回调方式重写对应回调法且不调 super。
+ * <p>
+ * 3.5.0+ 通知点击默认行为变更如下：
+ * 不重写 onNotifyMessageOpened 且没配 Action 点击跳首页。
  * @author: 郑少鹏
  * @date: 2019/5/31 16:17
  */
@@ -64,7 +67,7 @@ public class JpushCustomReceiver extends BroadcastReceiver {
                     message.arg1 = ACTION_MESSAGE_RECEIVED;
                 } else if (JPushInterface.ACTION_NOTIFICATION_RECEIVED.equals(intent.getAction())) {
                     Timber.d("[JpushCustomReceiver] 推来的通知");
-                    Timber.d("[JpushCustomReceiver] 推来的通知ID：%s", bundle.getInt(JPushInterface.EXTRA_NOTIFICATION_ID));
+                    Timber.d("[JpushCustomReceiver] 推来的通知 ID：%s", bundle.getInt(JPushInterface.EXTRA_NOTIFICATION_ID));
                     message.arg1 = ACTION_NOTIFICATION_RECEIVED;
                 } else if (JPushInterface.ACTION_NOTIFICATION_OPENED.equals(intent.getAction())) {
                     Timber.d("[JpushCustomReceiver] 点击打开通知");
@@ -131,13 +134,13 @@ public class JpushCustomReceiver extends BroadcastReceiver {
     /**
      * MyHandler
      * <p>
-     * 引用关系链Looper -> MessageQueue -> Message -> Handler -> Activity。
-     * 此时退Activity因存上引用关系致垃圾回收器将无法回收Activity而内存泄漏。
+     * 引用关系链 Looper -> MessageQueue -> Message -> Handler -> Activity。
+     * 此时退 Activity 因存上引用关系致垃圾回收器将无法回收 Activity 而内存泄漏。
      * <p>
-     * 静态内部类+弱引用。
-     * 静态内部类默不持外部类引用，故改静态内部类即可。同时此处弱引用持Activity引用。
+     * 静态内部类 + 弱引用。
+     * 静态内部类默不持外部类引用，故改静态内部类即可。同时此处弱引用持 Activity 引用。
      * <p>
-     * Activity退移所有信息后Handler与Activity生命周期同步。
+     * Activity 退移所有信息后 Handler 与 Activity 生命周期同步。
      */
     private static class MyHandler extends Handler {
         private final WeakReference<Context> weakReference;
@@ -167,7 +170,7 @@ public class JpushCustomReceiver extends BroadcastReceiver {
                     notificationOpened(bundle);
                     break;
                 case ACTION_RICHPUSH_CALLBACK:
-                    // 据JPushInterface.EXTRA_EXTRA内容处理（如打开新页、打开网页等）
+                    // 据 JPushInterface.EXTRA_EXTRA 内容处理（如打开新页、打开网页等）
                     break;
                 case ACTION_CONNECTION_CHANGE:
                     // ACTION_CONNECTION_CHANGE
