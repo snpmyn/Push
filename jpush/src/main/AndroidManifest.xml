@@ -35,7 +35,6 @@
 
     <!-- Required -->
     <application>
-
         <!--极光富媒体或极光早上好功能需设此 Activity 之 exported 为 true 覆盖 jcenter 上组件-->
         <activity
             android:name="cn.jpush.android.ui.PopWinActivity"
@@ -62,7 +61,6 @@
                 <category android:name="${applicationId}" />
             </intent-filter>
         </activity>
-
         <!--Jpush（极光推送公共服务）-->
         <!-- Since JCore2.0.0 Required SDK核心功能 -->
         <!-- android:process放Service于其它进程 -->

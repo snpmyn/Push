@@ -35,8 +35,8 @@ dependencies {
     /*自带*/
     implementation 'com.github.snpmyn.Util:utilone:v0.1'
     /*util*/
-    implementation 'cn.jiguang.sdk:jcore:2.1.4'
+    implementation 'cn.jiguang.sdk:jcore:2.6.0'
     /*JCore*/
-    api 'cn.jiguang.sdk:janalytics:2.1.0'
+    api 'cn.jiguang.sdk:janalytics:2.1.2'
     /*极光统计*/
 }

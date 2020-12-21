@@ -131,12 +131,12 @@ public class JanalyticsKit {
      *
      * @param context 上下文
      * @param event   事件模型
-     *                CountEvent（计数事件）
-     *                CalculateEvent（计算事件）
-     *                RegisterEvent（注册事件）
-     *                LoginEvent（登录事件）
-     *                BrowseEvent（浏览事件）
-     *                PurchaseEvent（购买事件）
+     *                {@link CountEvent}（计数事件）
+     *                {@link CalculateEvent}（计算事件）
+     *                {@link RegisterEvent}（注册事件）
+     *                {@link LoginEvent}（登录事件）
+     *                {@link BrowseEvent}（浏览事件）
+     *                {@link PurchaseEvent}（购买事件）
      */
     private static void onEvent(Context context, Event event) {
         JAnalyticsInterface.onEvent(context, event);
