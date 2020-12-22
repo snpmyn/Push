@@ -46,6 +46,16 @@
             android:name="cn.jiguang.analytics.android.view.BuryWebActivity"
             android:screenOrientation="portrait"
             android:theme="@android:style/Theme.NoTitleBar" />
+        <!-- provider -->
+        <provider
+            android:name="androidx.core.content.FileProvider"
+            android:authorities="@string/fileProviderAuthorities"
+            android:exported="false"
+            android:grantUriPermissions="true">
+            <meta-data
+                android:name="android.support.FILE_PROVIDER_PATHS"
+                android:resource="@xml/file_provider_paths" />
+        </provider>
         <!--Jpush（极光推送消息接收器）-->
         <!-- Required since 3.0.7 -->
         <!-- 新tag/alias接口返结果需开发者配一自定广播 -->

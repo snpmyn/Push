@@ -21,7 +21,7 @@ import value.PushConstant;
  */
 public class JpushMessageReceiverKit {
     /**
-     * OnMessage执行
+     * OnMessage 执行
      *
      * @param customMessage 自定消息
      */
@@ -30,7 +30,7 @@ public class JpushMessageReceiverKit {
     }
 
     /**
-     * OnNotifyMessageOpened执行
+     * OnNotifyMessageOpened 执行
      *
      * @param notificationMessage 通知消息
      */
