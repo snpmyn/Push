@@ -24,16 +24,16 @@
 |:-:|:-:|
 | 示例app | implementation project(path: ':jpush') |
 | 示例app | implementation project(path: ':janalytics') |
-| 一方库Jpush | api 'com.github.snpmyn.Util:*utilone*:v0.1'（避重）|
+| 一方库Jpush | api 'com.github.snpmyn.Util:utilone:v0.1.2'（避重）|
 | 一方库Jpush | implementation 'cn.jiguang.sdk:jcore:2.6.0' |
 | 一方库Jpush | api 'cn.jiguang.sdk:jpush:3.9.0'（避重）|
-| 一方库Janalytics | implementation 'com.github.snpmyn.Util:*utilone*:v0.1' |
+| 一方库Janalytics | implementation 'com.github.snpmyn.Util:utilone:v0.1.2' |
 | 一方库Janalytics | implementation 'cn.jiguang.sdk:jcore:2.6.0' |
 | 一方库Janalytics | api 'cn.jiguang.sdk:janalytics:2.1.2'（避重）|
 | 二方库Util-示例app | implementation project(path: ':utilone') |
 | 二方库Util-示例app | implementation project(path: ':utiltwo') |
 | 二方库Util-UtilOne | api 'com.github.bumptech.glide:glide:4.11.0'（避重）|
-| 二方库Util-UtilOne | api 'com.google.android.material:material:1.3.0-alpha04'（避重）|
+| 二方库Util-UtilOne | api 'com.google.android.material:material:1.3.0-beta01'（避重）|
 | 二方库Util-UtilOne | api 'io.reactivex:rxandroid:1.2.1'（避重）|
 | 二方库Util-UtilOne | api 'io.reactivex:rxjava:1.3.8'（避重）|
 | 二方库Util-UtilOne | api 'com.jakewharton.timber:timber:4.7.1'（避重）|
@@ -55,8 +55,8 @@
 | 一方库Janalytics | android:name="android.permission.WRITE_EXTERNAL_STORAGE"（避重）|
 | 一方库Janalytics | android:name="android.permission.ACCESS_NETWORK_STATE"（避重）|
 | 一方库Janalytics | android:name="android.permission.ACCESS_WIFI_STATE"（避重）|
-| 二方库Util-app | android:name="android.permission.WRITE_EXTERNAL_STORAGE"（避重）|
 | 二方库Util-app | android:name="android.permission.READ_EXTERNAL_STORAGE"（避重）|
+| 二方库Util-app | android:name="android.permission.WRITE_EXTERNAL_STORAGE"（避重）|
 | 二方库Util-UtilOne | 无 |
 | 二方库Util-UtilTwo | 无 |
 
@@ -116,8 +116,8 @@ android {
         ]
     }  
     compileOptions {
-        sourceCompatibility 1.8
-        targetCompatibility 1.8
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
     }
     configurations.all {
         resolutionStrategy.cacheChangingModulesFor 0, 'seconds'
@@ -125,8 +125,8 @@ android {
 }
 
 dependencies {
-    implementation 'com.github.snpmyn.Push:jpush:v0.1'
-    implementation 'com.github.snpmyn.Push:janalytics:v0.1'
+    implementation 'com.github.snpmyn.Push:jpush:v0.1.2.1'
+    implementation 'com.github.snpmyn.Push:janalytics:v0.1.2.1'
 }
 ```
 
