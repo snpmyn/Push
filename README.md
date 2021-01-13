@@ -32,8 +32,8 @@
 | 一方库Janalytics | api 'cn.jiguang.sdk:janalytics:2.1.2'（避重）|
 | 二方库Util-示例app | implementation project(path: ':utilone') |
 | 二方库Util-示例app | implementation project(path: ':utiltwo') |
-| 二方库Util-UtilOne | api 'com.github.bumptech.glide:glide:4.11.0'（避重）|
 | 二方库Util-UtilOne | api 'com.google.android.material:material:1.3.0-beta01'（避重）|
+| 二方库Util-UtilOne | api 'com.github.bumptech.glide:glide:4.11.0'（避重）|
 | 二方库Util-UtilOne | api 'io.reactivex:rxandroid:1.2.1'（避重）|
 | 二方库Util-UtilOne | api 'io.reactivex:rxjava:1.3.8'（避重）|
 | 二方库Util-UtilOne | api 'com.jakewharton.timber:timber:4.7.1'（避重）|
@@ -116,8 +116,8 @@ android {
         ]
     }  
     compileOptions {
-        sourceCompatibility JavaVersion.VERSION_1_8
-        targetCompatibility JavaVersion.VERSION_1_8
+        sourceCompatibility rootProject.ext.compileOptions["sourceCompatibility"]
+        targetCompatibility rootProject.ext.compileOptions["targetCompatibility"]
     }
     configurations.all {
         resolutionStrategy.cacheChangingModulesFor 0, 'seconds'
@@ -125,8 +125,8 @@ android {
 }
 
 dependencies {
-    implementation 'com.github.snpmyn.Push:jpush:v0.1.2.1'
-    implementation 'com.github.snpmyn.Push:janalytics:v0.1.2.1'
+    implementation 'com.github.snpmyn.Push:jpush:v0.0.1.1X'
+    implementation 'com.github.snpmyn.Push:janalytics:v0.0.1.1X'
 }
 ```
 
