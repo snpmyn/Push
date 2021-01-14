@@ -24,10 +24,10 @@
 |:-:|:-:|
 | 示例app | implementation project(path: ':jpush') |
 | 示例app | implementation project(path: ':janalytics') |
-| 一方库Jpush | api 'com.github.snpmyn.Util:utilone:v0.1.2'（避重）|
+| 一方库Jpush | api 'com.github.snpmyn.Util:utilone:v0.0.1.2X'（避重）|
 | 一方库Jpush | implementation 'cn.jiguang.sdk:jcore:2.6.0' |
 | 一方库Jpush | api 'cn.jiguang.sdk:jpush:3.9.0'（避重）|
-| 一方库Janalytics | implementation 'com.github.snpmyn.Util:utilone:v0.1.2' |
+| 一方库Janalytics | implementation 'com.github.snpmyn.Util:utilone:v0.0.1.2X' |
 | 一方库Janalytics | implementation 'cn.jiguang.sdk:jcore:2.6.0' |
 | 一方库Janalytics | api 'cn.jiguang.sdk:janalytics:2.1.2'（避重）|
 | 二方库Util-示例app | implementation project(path: ':utilone') |
@@ -101,7 +101,7 @@ build.gradle(app)
 apply plugin: 'com.android.application'
 
 android {
-    compileSdkVersion 29
+    compileSdkVersion 30
     defaultConfig {
         ...
         ndk {
@@ -116,8 +116,8 @@ android {
         ]
     }  
     compileOptions {
-        sourceCompatibility rootProject.ext.compileOptions["sourceCompatibility"]
-        targetCompatibility rootProject.ext.compileOptions["targetCompatibility"]
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
     }
     configurations.all {
         resolutionStrategy.cacheChangingModulesFor 0, 'seconds'
@@ -125,8 +125,8 @@ android {
 }
 
 dependencies {
-    implementation 'com.github.snpmyn.Push:jpush:v0.0.1.1X'
-    implementation 'com.github.snpmyn.Push:janalytics:v0.0.1.1X'
+    implementation 'com.github.snpmyn.Push:jpush:v0.0.1.2X'
+    implementation 'com.github.snpmyn.Push:janalytics:v0.0.1.2X'
 }
 ```
 

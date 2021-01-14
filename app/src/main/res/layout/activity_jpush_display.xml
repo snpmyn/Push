@@ -44,7 +44,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:text="@string/notification"
-            android:textColor="@color/background"
+            android:textColor="@color/white"
             android:textSize="@dimen/sp_16" />
     </com.google.android.material.appbar.MaterialToolbar>
 </RelativeLayout>
