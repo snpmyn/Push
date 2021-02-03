@@ -24,10 +24,10 @@
 |:-:|:-:|
 | 示例app | implementation project(path: ':jpush') |
 | 示例app | implementation project(path: ':janalytics') |
-| 一方库Jpush | api 'com.github.snpmyn.Util:utilone:v0.0.1.2X'（避重）|
+| 一方库Jpush | api 'com.github.snpmyn.Util:*utilone*:v0.0.1.3X'（避重）|
 | 一方库Jpush | implementation 'cn.jiguang.sdk:jcore:2.6.0' |
 | 一方库Jpush | api 'cn.jiguang.sdk:jpush:3.9.0'（避重）|
-| 一方库Janalytics | implementation 'com.github.snpmyn.Util:utilone:v0.0.1.2X' |
+| 一方库Janalytics | implementation 'com.github.snpmyn.Util:*utilone*:v0.0.1.3X' |
 | 一方库Janalytics | implementation 'cn.jiguang.sdk:jcore:2.6.0' |
 | 一方库Janalytics | api 'cn.jiguang.sdk:janalytics:2.1.2'（避重）|
 | 二方库Util-示例app | implementation project(path: ':utilone') |
@@ -75,7 +75,7 @@ buildscript {
 
     }
     dependencies {
-        classpath 'com.android.tools.build:gradle:4.1.1'
+        classpath 'com.android.tools.build:gradle:4.1.2'
         // 动态圈选插件（可选）
         classpath 'cn.jiguang.android:janalytics-gradle-plugin:3.0.0'
 
@@ -125,8 +125,8 @@ android {
 }
 
 dependencies {
-    implementation 'com.github.snpmyn.Push:jpush:v0.0.1.2X'
-    implementation 'com.github.snpmyn.Push:janalytics:v0.0.1.2X'
+    implementation 'com.github.snpmyn.Push:jpush:v0.0.1.3X'
+    implementation 'com.github.snpmyn.Push:janalytics:v0.0.1.3X'
 }
 ```
 
